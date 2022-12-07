@@ -1,0 +1,482 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #f2f4f8;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  display: block;
+  color: #000000;
+  
+}
+
+button {
+  outline: none;
+  border: none;
+  margin: 1rem;
+}
+
+
+
+.loadingSpinnerContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 5000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingSpinner {
+  width: 64px;
+  height: 64px;
+  border: 8px solid;
+  border-color: #00cc66 transparent #00cc66 transparent;
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+.navbar {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 85px;
+  background-color: #ffffff;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbarNav {width: 100%;margin-top: 0.75rem;overflow-y: hidden;}
+.navbarListItems {margin: 0; padding: 0; display: flex; justify-content: space-evenly; align-items: center;}
+.navbarListItem {cursor: pointer;display: flex;flex-direction: column;align-items: center;}
+.navbarListItemName,
+.navbarListItemNameActive {margin-top: 0.25rem; font-size: 14px; font-weight: 600; color: #8f8f8f;}
+.navbarListItemNameActive {color: #2c2c2c; }
+
+.heading {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 50px;
+  padding: 0 20px;
+  text-align: center;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background: #000;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  appearance: button;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn svg {margin-right: 8px;}
+.btn-reverse {background: #fff;color: #000;}
+.btn-block {width: 100%; margin-bottom: 20px;}
+.btn-sm {padding: 5px 15px;font-size: 13px;}
+.btn-danger {background: darkred;border: none;}
+.btn-back {width: 150px;margin-bottom: 20px;}
+.btn:hover {transform: scale(0.98);}
+
+.loadingSpinner {
+  width: 64px;
+  height: 64px;
+  border: 8px solid;
+  border-color: #000 transparent #555 transparent;
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 600px) {
+  .boxes {grid-template-columns: 1fr;}
+  .form {width: 90%;}
+  .ticket-created h2, .heading h1 {font-size: 2rem;}
+  .heading p {font-size: 1rem;}
+}
+
+body {font-family: 'Poppins', sans-serif;height: 100vh;text-align: center; }
+.heading p {line-height: 1.7; font-weight: 300;}
+h1,h2,h3 {font-weight: 600;margin-bottom: 10px;}
+
+
+.faicons {
+  width: 36px;
+  height: 36px;
+}
+.logoicon {
+  margin-top: 40px;
+  width:100px;
+  height: 100px;
+  transition: 0.4s;
+}
+
+@media (max-width: 600px) {
+  .logoicon { width: 75px;height: 75px;}
+}
+
+
+.logoicon:hover {
+  transform: rotate(-90deg);
+}
+
+
+.pageHeader {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.nameInput {
+  margin-bottom: 2rem;
+  background: url('./assets/svg/badgeIcon.svg') #ffffff 2.5% center no-repeat;
+}
+
+.emailInput {
+  margin-bottom: 2rem;
+  background: url('./assets/svg/personIcon.svg') #ffffff 2.5% center no-repeat;
+}
+
+.passwordInputDiv {
+  position: relative;
+}
+
+.passwordInput {
+  margin-bottom: 2rem;
+  background: url('./assets/svg/lockIcon.svg') #ffffff 2.5% center no-repeat;
+}
+
+.showPassword {
+  cursor: pointer;
+  position: absolute;
+  top: -4%;
+  right: 1%;
+  padding: 1rem;
+}
+
+.stockIcon {
+
+  margin: 16px;
+  position: absolute;
+  /* top: 4%; */
+  left: 1%
+
+}
+.forgotPasswordLink {
+  cursor: pointer;
+  color: #00cc66;
+  font-weight: 600;
+  text-align: right;
+}
+
+.signInBar,
+.signUpBar {
+  /* margin-top: 1rem; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: inherit;
+}
+
+.signInButton,
+.signUpButton,
+.signInText,
+.signUpText {
+  cursor: pointer;
+}
+@media (min-width: 1024px) {
+  .signInBar,
+  .signUpBar {
+    justify-content: start;
+  }
+}
+
+.signInText,
+.signUpText {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.signInButton,
+.signUpButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  background-color: #00cc66;
+  border-radius: 50%;
+  transition: 0.4s;
+  border: 1px solid white;
+}
+
+
+.signInButton:hover,
+.signUpButton:hover {
+  background-color: #00cc664e;
+  border: 1px solid #00cc66
+}
+@media (min-width: 1024px) {
+  .signInButton,
+  .signUpButton {
+    margin-left: 3rem;
+  }
+}
+
+.input,
+.passwordInput,
+.emailInput,
+.nameInput,
+.textarea {
+  box-shadow: rgba(0, 0, 0, 0.11);
+  border: none;
+  background: #ffffff;
+  border-radius: 3rem;
+  height: 3rem;
+  width: 100%;
+  outline: none;
+  font-family: 'Montserrat', sans-serif;
+  padding: 0 3rem;
+  font-size: 1rem;
+}
+
+.stockInput {
+  box-shadow: rgba(0, 0, 0, 0.11);
+  border: none;
+  background: #ffffff;
+  border-radius: 3rem;
+  height: 3rem;
+  width: 100%;
+  outline: none;
+  font-family: 'Montserrat', sans-serif;
+  padding: 0 5rem;
+  font-size: 1rem;
+}
+
+.pageContainer,
+.offers,
+.profile,
+.listingDetails,
+.category,
+.explore {
+  margin: 1rem;
+}
+@media (min-width: 1024px) {
+  .pageContainer,
+  .offers,
+  .profile,
+  .listingDetails,
+  .category,
+  .explore {
+    margin: 3rem;
+  }
+}
+
+.registerLink {
+  /* margin-top: 1rem; */
+  color: #00cc66;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+
+
+
+/* PROFILE */
+/* PROFILE */
+/* PROFILE */
+
+.profile {
+  margin-bottom: 10rem;
+
+
+}
+
+.profileHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logOut {
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  text-transform: uppercase;
+  background-color: black;
+  padding: 0rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  transition: 0.4s;
+}
+
+.logOut p {
+  font-size: 1rem;
+  margin: 12px
+}
+
+
+.logOut:hover {
+  color: black;
+  background-color: white;
+}
+
+.profileDetailsHeader {
+  display: flex;
+  justify-content: space-between;
+  max-width: 100%;
+}
+
+.personalDetailsText {
+  font-weight: 600;
+}
+
+.changePersonalDetails {
+  cursor: pointer;
+  font-weight: 600;
+  color: #00cc66;
+  border: 1px solid #00cc66;
+  padding: 4px;
+  border-radius: 4px;
+  transition: 0.4s;
+}
+
+.changePersonalDetails:hover {
+  color: #ffffff;
+  background-color: #00cc66;
+}
+
+.profileCard {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.2);
+  max-width: 100%;
+  /* border: 1px solid black; */
+}
+
+
+
+
+.profileDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.profileName,
+.profileEmail,
+.profileAddress,
+.profileAddressActive,
+.profileEmailActive,
+.profileNameActive {
+  all: unset;
+  font-family: 'Poppins';
+  /* margin: 0.1rem 0; */
+  font-weight: 400;
+  width: 100%;
+  height: 40px;
+
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+
+.profileNameActive {
+  /* background-color: rgba(44, 44, 44, 0.1); */
+  border: 1px solid rgba(0, 0, 0, 1);
+  /* height: 40px; */
+  border-radius: 8px;
+
+
+}
+
+.profileEmail,
+.profileAddress,
+.profileAddressActive,
+.profileEmailActive {
+  font-weight: 500;
+}
+
+
+.profileAddressActive {
+  background-color: rgba(44, 44, 44, 0.1);
+}
+
+
+.profileDetailsText {
+  font-weight: 600;
+}
+
+@media (min-width: 1024px) {
+  .profileName,
+  .profileEmail,
+  .profileAddress,
+  .profileAddressActive,
+  .profileEmailActive,
+  .profileNameActive {
+    width: 40%;
+  }
+}
+
+.divlogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* text-align: center; */
+  width: 100%;
+  /* height: 300px; */
+}
+
