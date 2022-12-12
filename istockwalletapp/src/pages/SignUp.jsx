@@ -7,6 +7,8 @@ import {db} from '../firebase.config'
 import {ReactComponent as ArrowRightIcon} from '../assets/svg/keyboardArrowRightIcon.svg'
 import visibilityIcon from '../assets/svg/visibilityIcon.svg'
 import { FaGoogleWallet } from 'react-icons/fa'
+import OAuth from '../components/OAuth'
+
 
 function SignUp() {
     const [showPassword, setShowPassword] = useState(false)
@@ -90,8 +92,8 @@ function SignUp() {
                         </button>
                     </div>
                 </form>
-            
-                {/* GOOGLE AUTH */}
+
+                <OAuth />
 
                 <Link to='/sign-in' className='registerLink'> Já possuo uma conta</Link>
             
