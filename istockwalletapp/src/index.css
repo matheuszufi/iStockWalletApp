@@ -511,3 +511,119 @@ h1,h2,h3 {font-weight: 600;margin-bottom: 10px;}
 .socialIconDiv:hover {
   transform: scale(1.2);
 }
+
+#stockCardDiv {
+
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  /* margin: 12px; */
+  /* padding: 12px; */
+  justify-content: center;
+}
+
+#stockCard {
+  background-color: white;
+  width: 300px;
+  min-width: 250px;
+  height: 275px;
+  /* background-color: rgba(0, 0, 0, 0.1); */
+  margin: 12px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+
+}
+#stockCard h3 {
+  color: #00cc66;  
+}
+#cardHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* margin: 4px; */
+  /* width: 100%; */
+  height: 75px;
+
+}
+
+
+
+#cardHeaderVolatility {
+  /* margin: 0px; */
+  /* background-color: red; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+#cardHeaderVolatility button {
+  margin: 0px;
+  width:24px;
+  
+  background-color:white;
+  /* color: #00cc66; */
+}
+
+#cardHeaderVolatilityInput {
+  /* background-color: red; */
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+#cardHeaderVolatilityBtn {
+  /* background-color: red; */
+}
+
+#grafico {
+  width: 95%;
+}
+
+#stockCard:hover {
+  position: fixed;
+  width: 90%;
+  height: 50%;
+
+}
+
+#stockCard:hover #grafico {
+  width: 50%;
+}
+
+#cardHoverDiv {
+  display: none;
+}
+
+#stockCard:hover #cardHoverDiv {
+  display: flex;
+}
+
+#compra {
+  background-color:#00cc66;
+  border-radius: 8px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+#venda {
+  background-color: rgb(255, 102, 102);
+  border-radius: 8px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+#compraVendaDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content:space-evenly;
+  margin: 0px;
+  /* background-color: red; */
+  height: 80px;
+  width: 90%;
+  
+}
