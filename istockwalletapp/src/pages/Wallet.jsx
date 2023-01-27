@@ -1,89 +1,50 @@
+import React, { Component } from 'react';
 
-import {Link, useNavigate} from 'react-router-dom'
-import { FaGoogleWallet, FaSearch, FaArrowUp } from 'react-icons/fa'
-import Grafico from '../assets/grafico.png'
+class StockData extends Component {
+  state = {
+    data: null
+  }
 
-function Wallet() {
- 
+  componentDidMount() {
+    const stockSymbol = 'ITUB4.SAO';
+    const apiKey = 'EZL3XCWTMYZEL4MD';
+    const interval = '1min';
+
+    fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${stockSymbol}&interval=${interval}&apikey=${apiKey}`)
+      .then(response => response.json())
+      .then(data => {
+        // update the component's state with the data
+        this.setState({ data });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  render() {
+    const { data } = this.state;
+
+    if (!data) {
+      return <p>Loading...</p>;
+    }
+
     return (
-        <>
-        <Link to='/' className=''>
-            <FaGoogleWallet  fill='#00cc66' className='logoicon'/>
-        </Link>
-        <header className="walletHeader">
-            <h1>Carteiras</h1>
-            <div className='stockInputDiv'>
-                <select type="text" placeholder='TICKER (EX: VALE3)' className='stockInput'>
-                    <option value="Vale S.A.(VALE3)">Vale S.A.(VALE3)</option>
-                    <option value="Itaú Unibanco(ITUB4)">Itaú Unibanco(ITUB4)</option>
-                    <option value="Apple Inc(AAPL)">Apple Inc(AAPL)</option>
-                    <option value="Microsoft Corp(MSFT)">Microsoft Corp(MSFT)</option>
-                    <option value="Vanguard 500 Index Fund ETF(VOO)">Vanguard 500 Index Fund ETF(VOO)</option>
-                    <option value="International Business Machine(IBM)">International Business Machine(IBM)</option>
-                </select>
-                <FaSearch  className='stockIcon'/>
-                <button className="btn btn-primary">Obter Dados</button>
-            </div>
-           
-            <div id='stockCardDiv'>
-                <div id="stockCard">
-                    <div id="cardHeader">
-                        <div id=''>
-                        <h1>ABEV3</h1>
-                        </div>
-                        <div id="cardHeaderVolatility">
-                            <div id='cardHeaderVolatilityBtn'>
-                                <button>D</button>
-                                <button>S</button>
-                                <button>M</button>
-                                <button>1A</button>
-                                <button>2A</button>
-                                <button>5A</button>     
-                            </div>
-                            <div id="cardHeaderVolatilityInput">
-                            <h3><FaArrowUp /> 2,87%</h3>
-                            </div>
-
-                        </div>
-                    </div>
-               
-                    <div id='graficoDiv'>
-                    <img id='grafico' src={Grafico} />
-                    </div>
-                    <div id="compraVendaDiv">
-                    <div id="compra">Compra: R$20,45</div>
-                    <div id='venda'>Venda: R$41,52</div>
-                    </div>
-                
-
-                    <div id='cardHoverDiv'>
-                        <p>FC Desc.:</p>
-                    </div>
-                </div>
-    
-                <div id="stockCard"></div>
-                <div id="stockCard"></div>
-                <div id="stockCard"></div>
-                <div id="stockCard"></div>
-                <div id="stockCard"></div>
-
-
-
-
-
-            </div>
-
-
-
-
-
-
-
-
-        </header>
-
-        </>
-    )
+      <div>
+        <h2>Stock Data</h2>
+        <table>
+          <thead>
+            <tr>
+                    <th>Date</th>
+                    <th>Open</th>
+                    <th>High</th>
+                    <th>Low</th>
+                    <th>Close</th>
+                    <th>Volume</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+  )
 }
-
-export default Wallet
+}
+  export default StockData
