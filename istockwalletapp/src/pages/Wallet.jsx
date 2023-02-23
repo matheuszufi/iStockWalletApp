@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../index.css';
 
 const API_KEY = 'EZL3XCWTMYZEL4MD';
+// const API_KEY2 = '1N7LZJYVH9JVQ0LH';
 
 const Abev3Itub4ValueScraper = () => {
   const [abev3Value, setAbev3Value] = useState(null);
