@@ -11,6 +11,8 @@ import Wallet from './pages/Wallet'
 import About from './pages/About'
 import ForgotPassword from './pages/ForgotPassword'
 
+
+
 function App() {
   return (
     <>
@@ -26,7 +28,7 @@ function App() {
         <Route path='/profile' element={<PrivateRoute />} >
           <Route path='/profile' element={<Profile />} />
         </Route>
-        
+ 
 
         </Routes>
         <Navbar /> 

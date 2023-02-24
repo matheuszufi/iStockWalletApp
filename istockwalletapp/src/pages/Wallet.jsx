@@ -2,22 +2,26 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../index.css';
 
+import Sheet from '../components/Sheet';
+
 const API_KEY = 'EZL3XCWTMYZEL4MD';
-// const API_KEY2 = '1N7LZJYVH9JVQ0LH';
+const API_KEY2 = '1N7LZJYVH9JVQ0LH';
+const API_KEY3 = '7BMTHDRHWL4TWMDG';
+const API_KEY4 = 'RGO3PWMCJ78FJNP4';
 
 const Abev3Itub4ValueScraper = () => {
   const [abev3Value, setAbev3Value] = useState(null);
   const [itub4Value, setItub4Value] = useState(null);
   const [klbn11Value, setKlbn11Value] = useState(null);
-//   const [taee11Value, setTaee11Value] = useState(null);
+  // const [taee11Value, setTaee11Value] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       const abev3Url = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=ABEV3.SAO&apikey=${API_KEY}`;
-      const itub4Url = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=ITUB4.SAO&apikey=${API_KEY}`;
-      const klbn11Url = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=KLBN11.SAO&apikey=${API_KEY}`;
-    //   const taee11Url = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=TAEE11.SAO&apikey=${API_KEY}`;
+      const itub4Url = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=ITUB4.SAO&apikey=${API_KEY2}`;
+      const klbn11Url = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=KLBN11.SAO&apikey=${API_KEY3}`;
+      // const taee11Url = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=TAEE11.SAO&apikey=${API_KEY4}`;
 
 
       try {
@@ -129,6 +133,9 @@ const Abev3Itub4ValueScraper = () => {
                 </div>
             </div>
         </div> */}
+        
+        <Sheet/>
+
 
         </>
       )}
