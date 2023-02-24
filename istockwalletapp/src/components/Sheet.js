@@ -19,9 +19,10 @@ const Sheet = () => {
   }, []);
 
   return (
-    <div>
+    <div className='teste'>
+      <p>IEX API</p>
       <h2>Valor da ação ITUB:</h2>
-      <p>R$ {itauStockValue.toFixed(2)}</p>
+      <p>$ {itauStockValue.toFixed(2)}</p>
     </div>
   );
 };
