@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../index.css';
 
 import Sheet from '../components/Sheet';
+import PlanilhaGoogle from '../components/PlanilhaGoogle';
 
 const API_KEY = 'EZL3XCWTMYZEL4MD';
 const API_KEY2 = '1N7LZJYVH9JVQ0LH';
@@ -135,6 +136,8 @@ const Abev3Itub4ValueScraper = () => {
         </div> */}
         
         <Sheet/>
+        <PlanilhaGoogle />
+
 
 
         </>
