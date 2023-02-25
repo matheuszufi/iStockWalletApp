@@ -11,7 +11,7 @@ const Cards = () => {
       const fetchData = async () => {
   
         try {
-          const response = await axios.get("https://brapi.dev/api/quote/AESB3,PETR4,MGLU3,TAEE11")
+          const response = await axios.get("https://brapi.dev/api/quote/AESB3,ABEV3,BBAS3,BBSE3,BBDC4,CPLE6,EGIE3,FLRY3,ITUB4,ITSA4,KLBN11,MDIA3,MGLU3,ODPV3,PETR4,PSSA3,RADL3,SAPR11,TAEE11,VALE3,WEGE3")
           const results = response.data.results
           
           setResults(results);
@@ -43,6 +43,7 @@ const Cards = () => {
                   <h2>R${result.regularMarketPrice.toFixed(2)}</h2>
               </div>
             </div>
+            <p></p>
           </div>
         }))
     )
