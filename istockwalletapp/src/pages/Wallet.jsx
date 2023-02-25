@@ -32,7 +32,6 @@ const Abev3Itub4ValueScraper = () => {
         <p>Carregando...</p>
       ) : (
       results.map(result => {
-        console.log(result)
         return <div key={result.symbol} className='cartao'>
           <div className='cartao-header'>
             <div className='cartao-header-left'>
