@@ -11,7 +11,7 @@ function PlanilhaGoogle() {
         scopes: ["https://www.googleapis.com/auth/spreadsheets"],
       });
 
-      const doc = new GoogleSpreadsheet("ID_DA_SUA_PLANILHA");
+      const doc = new GoogleSpreadsheet("1lGiFO2ktU4B1-dptQL6cMK5tJ7-L_rJScbHa3upMeP4");
 
       await doc.useServiceAccountAuth({
         client_email: process.env.REACT_APP_GOOGLE_CLIENT_EMAIL,
