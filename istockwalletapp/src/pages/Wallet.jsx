@@ -79,7 +79,7 @@ const Abev3Itub4ValueScraper = () => {
         <p>Carregando...</p>
       ) : (
         <>
-        <div></div>
+        {/* <div></div>
         <div className='cartao'>
             <div className='cartao-header'>
                 <div className='cartao-header-left'>
@@ -120,7 +120,7 @@ const Abev3Itub4ValueScraper = () => {
 
                 </div>
             </div>
-        </div>
+        </div> */}
         {/* <div className='cartao'>
             <div className='cartao-header'>
                 <div className='cartao-header-left'>
