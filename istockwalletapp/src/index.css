@@ -630,7 +630,7 @@ h1,h2,h3 {font-weight: 600;margin-bottom: 10px;}
 
 .cartao {
   background-color: rgba(255, 255, 255, 0.689);
-  width: 350px;
+  width: 450px;
   height: 200px;
   border-radius: 8px;
   margin: 20px 12px;
@@ -652,16 +652,17 @@ h1,h2,h3 {font-weight: 600;margin-bottom: 10px;}
   /* background-color: #00cc66; */
   height: 100%;
   width: 150px;
-  line-height: 4px;
+  line-height: 20px;
   display: flex;
   flex-direction: column;
   text-align: start;
 
+
 }
 
 .cartao-header-left h1 {
-  font-size: 24px;
-  margin: 20px;
+  font-size: 20px;
+  /* margin: 20px; */
 }
 .cartao-header-left p {
   margin: 0px 20px;
