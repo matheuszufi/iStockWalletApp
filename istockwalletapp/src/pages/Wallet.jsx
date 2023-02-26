@@ -7,7 +7,7 @@ function Wallet() {
     <div className='wallet-container'>
       <h1> EMPRESAS</h1>
       <div className='cards-container'>
-      <Cards/>
+        <Cards/>
       </div>
 
     </div>
