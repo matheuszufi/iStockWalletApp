@@ -2,29 +2,26 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../index.css';
 
-
 const Cards = () => {
     const [results, setResults] = useState(null);
-    // const [resultsDY, setResultsDY] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
   
     useEffect(() => {
       const fetchData = async () => {
-  
         try {
-          const response = await axios.get("https://brapi.dev/api/quote/AESB3,ABEV3,BBAS3,BBSE3,BBDC4,CPLE6,EGIE3,FLRY3,ITUB4,ITSA4,KLBN11,MDIA3,MGLU3,ODPV3,PETR4,PSSA3,RADL3,SAPR11,TAEE11,VALE3,WEGE3?range=5y&fundamental=true&dividends=true")
+          const response = await axios.get("https://brapi.dev/api/quote/AESB3,ABEV3,BBAS3,BBSE3,BBDC4,CPLE6,EGIE3,FLRY3,HYPE3,ITUB4,ITSA4,KLBN11,MDIA3,MGLU3,ODPV3,PETR4,PSSA3,RADL3,SAPR11,TAEE11,VALE3,WEGE3?range=max&fundamental=true&dividends=true")
           const results = response.data.results
           setResults(results);
      
-
           setIsLoading(false);
         } catch (error) {
           console.error('Erro ao fazer requisição:', error);
           setIsLoading(false);
         }
       };
-  
+
       fetchData();
+
     }, []);
   
     return (
@@ -32,7 +29,8 @@ const Cards = () => {
           <p>Carregando...</p>
         ) : (
         results.map(result => {
-          console.log(result)
+          
+          console.log(result[1])
 
           return <div key={result.symbol} className='cartao'>
             <div className='cartao-header'>
@@ -48,29 +46,26 @@ const Cards = () => {
                   <h2>R${result.regularMarketPrice.toFixed(2)}</h2>
               </div>
             </div>
+
+            <div className='cartao-div-respo'> 
             <div className='cartao-body'>
 
-              <div className='cartao-body-item'>
-                <h6>Valor de Mercado:  </h6>
-                <p> R${result.marketCap.toLocaleString('pt-BR', { minimumFractionDigits: 0 })}</p>
-              </div>
+<div className='cartao-body-item'>
+  <h6>V.M.:  </h6>
+  <p> R${result.marketCap.toLocaleString('pt-BR', { minimumFractionDigits: 0 })}</p>
+</div>
 
-              {/* <div className='cartao-body-item'>
-                <h6>Total de ações:</h6>
-                <p>{(result.marketCap/result.regularMarketPrice).toLocaleString('pt-BR', { minimumFractionDigits: 0 })}</p>       
-              </div> */}
-    
-              <div className='cartao-body-item'>
-                <h6>P/L:</h6>
-                <p>{result.priceEarnings}</p>         
-              </div>
-       
+{/* <div className='cartao-body-item'>
+  <h6>P/L:</h6>
+  <p>{result.priceEarnings}</p>         
+</div> */}
 
-
-    
-       
+</div>
+<div className='cartao-footer'>
+  <button>VER RELATÓRIO</button>
+</div>
             </div>
-
+        
           </div>
         }))
     )

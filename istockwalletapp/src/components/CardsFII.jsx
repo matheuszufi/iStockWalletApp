@@ -48,10 +48,12 @@ const CardsFII = () => {
                   <h2>R${result.regularMarketPrice.toFixed(2)}</h2>
               </div>
             </div>
+
+            <div className='cartao-div-respo'>
             <div className='cartao-body'>
 
               <div className='cartao-body-item'>
-                <h6>Valor de Mercado:  </h6>
+                <h6>V.M.:  </h6>
                 <p> R${result.marketCap.toLocaleString('pt-BR', { minimumFractionDigits: 0 })}</p>
               </div>
 
@@ -59,17 +61,20 @@ const CardsFII = () => {
                 <h6>Total de ações:</h6>
                 <p>{(result.marketCap/result.regularMarketPrice).toLocaleString('pt-BR', { minimumFractionDigits: 0 })}</p>       
               </div> */}
-    
+              {/*     
               <div className='cartao-body-item'>
                 <h6>P/L:</h6>
                 <p>{result.priceEarnings}</p>         
+              </div> */}
+
               </div>
-       
 
-
-    
-       
+              <div className='cartao-footer'>
+                <button>VER RELATÓRIO</button>
+              </div>
             </div>
+         
+         
 
           </div>
         }))

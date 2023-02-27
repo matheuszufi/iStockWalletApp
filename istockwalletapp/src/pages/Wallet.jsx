@@ -9,14 +9,19 @@ function Wallet() {
     <div className='wallet-container'>
      
       <div className='cards-container'>
-      <h1 className='titulo'> EMPRESAS</h1>
+      <h1 className='titulo'>STOCKS</h1>
         <div className='cards-stocks'>
           <Cards/>
         </div>
-        <h1 className='titulo'> FUNDOS IMOBILIARIOS</h1>
+
+        <div className='divisoria-wallet'></div>
+
+        <h1 className='titulo'> FIIs</h1>
         <div className='cards-fiis'>
           <CardsFII/>
         </div>
+
+        <div className='divisoria-wallet'></div>
 
         <h1 className='titulo'>ETFs</h1>
         <div className='cards-etfs'>
