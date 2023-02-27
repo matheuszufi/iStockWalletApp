@@ -643,6 +643,14 @@ h1,h2,h3 {font-weight: 600;margin-bottom: 10px;}
   padding-bottom: 100px;
   justify-content: center;
 }
+.cards-container .titulo {
+  /* background-color: red; */
+ width: 100%;
+ display: flex;
+ justify-content: start;
+ padding: 4px 80px;
+  
+}
 
 
 .cartao {
@@ -756,4 +764,25 @@ h1,h2,h3 {font-weight: 600;margin-bottom: 10px;}
   margin: 0px;
   height: 20px;
 
+}
+
+.cards-stocks {
+  /* background-color: red; */
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* flex-direction: column; */
+}
+
+.cards-fiis {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cards-etfs {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  /* justify-content: center; */
 }
