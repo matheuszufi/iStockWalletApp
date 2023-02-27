@@ -2,29 +2,26 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../index.css';
 
-
-const CardsFII = () => {
+const CardsHome = () => {
     const [results, setResults] = useState(null);
-    // const [resultsDY, setResultsDY] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
   
     useEffect(() => {
       const fetchData = async () => {
-  
         try {
-          const response = await axios.get("https://brapi.dev/api/quote/BCFF11,HGLG11,KNCR11,KNRI11,MXRF11,XPLG11?range=5y&fundamental=true&dividends=true")
+          const response = await axios.get("https://brapi.dev/api/quote/BBAS3,PETR4,VALE3?range=max&fundamental=true&dividends=true")
           const results = response.data.results
           setResults(results);
      
-
           setIsLoading(false);
         } catch (error) {
           console.error('Erro ao fazer requisição:', error);
           setIsLoading(false);
         }
       };
-  
+
       fetchData();
+
     }, []);
   
     return (
@@ -32,37 +29,30 @@ const CardsFII = () => {
           <p>Carregando...</p>
         ) : (
         results.map(result => {
-          console.log(result)
+          
+          console.log(result[1])
 
-          return <div key={result.symbol} className='cartao'>
-            <div className='cartao-header'>
-              <div className='cartao-header-left'> 
-                <img alt="Stock Logo" src={result.logourl} />
+          return <div key={result.symbol} className='cartao-home'>
+            <div className='cartao-home-header'>
+              <div className='cartao-home-header-left'> 
+                <img  alt="Stock Logo" src={result.logourl} />
               </div>
-              <div className='cartao-header-mid'>
+              <div className='cartao-home-header-mid'>
                   <h1>{result.longName}</h1>
                   <p>{result.symbol}</p>
               </div>
-              <div className='cartao-header-right'>
+              <div className='cartao-home-header-right'>
                   <p>Valor:</p>
                   <h2>R${result.regularMarketPrice.toFixed(2)}</h2>
               </div>
             </div>
 
-            <div className='cartao-div-respo'>
 
-
-              <div className='cartao-footer'>
-                <button>VER RELATÓRIO</button>
-              </div>
-            </div>
-         
-         
-
+        
           </div>
         }))
     )
   };
   
-  export default CardsFII;
+  export default CardsHome;
   

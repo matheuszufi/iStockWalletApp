@@ -3,6 +3,7 @@ import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Home from './pages/Home'
 import Navbar from './components/Navbar'
+import Navbar2 from './components/Navbar2'
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
 import PrivateRoute from './components/PrivateRoute'
@@ -17,21 +18,24 @@ function App() {
   return (
     <>
       <Router>
+      <Navbar /> 
         <Routes>
         <Route path='/' element={<Home/>} />
         <Route path='/sign-in' element={<SignIn />} />
         <Route path='/sign-up' element={<SignUp />} />
         <Route path='/about' element={<About />} />
+   
+        <Route path='/wallet' element={<PrivateRoute />} >
         <Route path='/wallet' element={<Wallet />} />
+        </Route>
+        
         <Route path='/forgot-password' element={<ForgotPassword/>} />
         
         <Route path='/profile' element={<PrivateRoute />} >
           <Route path='/profile' element={<Profile />} />
         </Route>
- 
-
         </Routes>
-        <Navbar /> 
+        <Navbar2 /> 
       </Router>
 
       <ToastContainer autoClose={3000} />

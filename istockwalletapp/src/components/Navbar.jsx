@@ -2,8 +2,10 @@ import {useNavigate, useLocation} from 'react-router-dom'
 
 import {ReactComponent as PersonOutlineIcon} from '../assets/svg/personOutlineIcon.svg'
 
+import {FaWallet, FaGoogleWallet} from 'react-icons/fa'
 
-import {FaWallet, FaHome} from 'react-icons/fa'
+
+
 
 
 function Navbar() {
@@ -17,29 +19,37 @@ function Navbar() {
     }
 
     return ( 
+        <div>
 
-
-        <footer className='navbar'>
-                <nav className="navbarNav">
-                    <ul className='navbarListItems'>
-                        <li className='navbarListItem' onClick={() => navigate('/')}>
-                            <FaHome className='faicons' fill={pathMatchRoute('/') ? '#2c2c2c' : '#8f8f8f'} width='36px' height='36px'/>
-                            <p className={pathMatchRoute('/') ? 'navbarListItemNameActive' : 'navbarListItemName'}>Início</p>
+            <footer className='navbarTop'>
+                <nav className="navbarNavTop">
+                    <ul className='navbarListItemsTop'>
+                        <li className='navbarListItemTop' onClick={() => navigate('/')}>
+                            <FaGoogleWallet className='faicons' fill={pathMatchRoute('/') ? '#00cc66' : 'rgb(20,20,20)'} width='36px' height='36px'/>
+                            <p className={pathMatchRoute('/') ? 'navbarTopListItemNameActive' : 'navbarTopListItemName'}>Início</p>
+                        </li>
+                        <div className='navRight'>
+                        <li className='navbarListItemTop' onClick={() => navigate('/wallet')}>
+                        <FaWallet className='faicons' fill={pathMatchRoute('/wallet') ?'rgb(20,20,20)' : 'rgb(20,20,20)'} width='36px' height='36px'/>
+                            <p className={pathMatchRoute('/wallet') ? 'navbarTopListItemNameActive' : 'navbarTopListItemName'}>Carteira</p>
                         </li>
 
-                        <li className='navbarListItem' onClick={() => navigate('/wallet')}>
-                            <FaWallet className='faicons' fill={pathMatchRoute('/wallet') ? '#2c2c2c' : '#8f8f8f'} width='36px' height='36px'/>
-                            <p className={pathMatchRoute('/wallet') ? 'navbarListItemNameActive' : 'navbarListItemName'}>Carteira</p>
+                        <li className='navbarListItemTop' onClick={() => navigate('/profile')}>
+                            <PersonOutlineIcon fill={pathMatchRoute('/profile') ? 'rgb(20,20,20)' : 'rgb(20,20,20)'} width='36px' height='36px'/>
+                            <p className={pathMatchRoute('/profile') ? 'navbarTopListItemNameActive' : 'navbarTopListItemName'}>Perfil</p>
                         </li>
-
-                        <li className='navbarListItem' onClick={() => navigate('/profile')}>
-                            <PersonOutlineIcon fill={pathMatchRoute('/profile') ? '#2c2c2c' : '#8f8f8f'} width='36px' height='36px'/>
-                            <p className={pathMatchRoute('/profile') ? 'navbarListItemNameActive' : 'navbarListItemName'}>Perfil</p>
-                        </li>
+                        </div>
+           
 
                     </ul>
                 </nav>
-        </footer>
+            </footer>
+
+        
+        </div>
+     
+
+       
     )
 }
 

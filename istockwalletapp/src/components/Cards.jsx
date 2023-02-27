@@ -35,7 +35,7 @@ const Cards = () => {
           return <div key={result.symbol} className='cartao'>
             <div className='cartao-header'>
               <div className='cartao-header-left'> 
-                <img alt="Stock Logo" src={result.logourl} />
+                <img  alt="Stock Logo" src={result.logourl} />
               </div>
               <div className='cartao-header-mid'>
                   <h1>{result.longName}</h1>
@@ -48,20 +48,8 @@ const Cards = () => {
             </div>
 
             <div className='cartao-div-respo'> 
-            <div className='cartao-body'>
-
-<div className='cartao-body-item'>
-  <h6>V.M.:  </h6>
-  <p> R${result.marketCap.toLocaleString('pt-BR', { minimumFractionDigits: 0 })}</p>
-</div>
-
-{/* <div className='cartao-body-item'>
-  <h6>P/L:</h6>
-  <p>{result.priceEarnings}</p>         
-</div> */}
-
-</div>
-<div className='cartao-footer'>
+          
+            <div className='cartao-footer'>
   <button>VER RELATÓRIO</button>
 </div>
             </div>
