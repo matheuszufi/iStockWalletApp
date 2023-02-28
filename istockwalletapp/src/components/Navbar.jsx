@@ -30,12 +30,12 @@ function Navbar() {
                         </li>
                         <div className='navRight'>
                         <li className='navbarListItemTop' onClick={() => navigate('/wallet')}>
-                        <FaWallet className='faicons' fill={pathMatchRoute('/wallet') ?'rgb(20,20,20)' : 'rgb(20,20,20)'} width='36px' height='36px'/>
+                        <FaWallet fill={pathMatchRoute('/wallet') ?'rgb(20,20,20)' : 'rgb(20,20,20)'} width='20px' height='20px'/>
                             <p className={pathMatchRoute('/wallet') ? 'navbarTopListItemNameActive' : 'navbarTopListItemName'}>Carteira</p>
                         </li>
 
                         <li className='navbarListItemTop' onClick={() => navigate('/profile')}>
-                            <PersonOutlineIcon fill={pathMatchRoute('/profile') ? 'rgb(20,20,20)' : 'rgb(20,20,20)'} width='36px' height='36px'/>
+                            <PersonOutlineIcon fill={pathMatchRoute('/profile') ? 'rgb(20,20,20)' : 'rgb(20,20,20)'} width='24px' height='24px'/>
                             <p className={pathMatchRoute('/profile') ? 'navbarTopListItemNameActive' : 'navbarTopListItemName'}>Perfil</p>
                         </li>
                         </div>

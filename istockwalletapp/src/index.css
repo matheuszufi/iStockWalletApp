@@ -70,7 +70,8 @@ button {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border-top: 1px solid rgba(128, 128, 128, 0.5);
+  /* border-top: 1px solid rgba(128, 128, 128, 0.5); */
+  border-bottom: 1px solid rgba(70, 70, 70, 0.3);
 }
 .navbarNavTop {
  overflow-y: hidden;
@@ -95,7 +96,7 @@ button {
   left: 0;
   bottom: 0;
   right: 0;
-  height: 85px;
+  height: 68px;
   background-color: #ffffff;
   z-index: 1000;
   /* display: flex; */
@@ -105,6 +106,7 @@ button {
 }
 .navRight {
   display: flex;
+  align-items: center;
   
 }
 
@@ -118,7 +120,7 @@ button {
 
 .navbarTopListItemName,
 .navbarTopListItemNameActive {margin-top: 0.25rem; font-size: 14px; font-weight: 600; color: #363636;}
-.navbarTopListItemNameActive {color: #2c2c2c; }
+.navbarTopListItemNameActive {color: #00cc66; }
 
 .navbarListItemsTop {
   display: flex;
@@ -160,11 +162,11 @@ button {
   height: 700px;
   /* background-color: red; */
 
+  /* background: url(./assets/png/banner.png); */
+
+
 }
-.heading h1 {
-  font-size: 2rem;
-  /* background-color: red; */
-}
+
 
 .btn {
   padding: 10px 20px;
@@ -237,6 +239,7 @@ h1,h2,h3 {font-weight: 600;margin-bottom: 10px;}
   justify-content: center;
   align-items: center;
   width: 100%;
+
 }
 .home-text {
   max-width: 600px;
@@ -769,128 +772,27 @@ h1,h2,h3 {font-weight: 600;margin-bottom: 10px;}
 }
 
 
-.cartao {
-  background-color: rgba(255, 255, 255, 0.4);
-  width: 350px;
-  height: 120px;
-  border-radius: 8px;
-  margin: 8px 8px;
-  border: 1px solid rgba(128, 128, 128, 0.3);
-}
-
-.cartao-header {
-  width: 100%;
-  background-color: rgba(164, 162, 162, 0.2);
-  border-bottom: 1px solid rgba(70, 70, 70, 0.2);
-  height: 70px;
-  display: flex;
-  border-radius: 8px 8px 0px 0px;
-  /* justify-content: center; */
-  align-items: center;
-  /* text-align: center; */
-}
-.cartao-header-left {
-  width: 120px;
-  /* background-color: red; */
-  height: 100%;
-  display: flex;
-  align-items: center;
-
-}
-.cartao-header-left img {
-  /* scale: 1.3; */
-  /* margin-left: -8px; */
-  /* box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.434); */
-  border-radius: 4px;
-  border: 1px solid rgba(70, 70, 70, 0.2);
-  transition: 0.4s;
-  margin: 8px;
-}
-
-.cartao-header-left img:hover {
-  scale: 1.5;
-}
-
-.cartao-header-mid {
-  /* background-color: #00cc66; */
-  height: 100%;
-  width: 300px;
-  line-height: 12px;
-  display: flex;
-  /* font-size: 8px; */
-  flex-direction: column;
-  justify-content: center;
-
-
-}
-
-
-
-.cartao-header-mid h1 {
-  font-size: 12px;
-  margin: 4px 0px;
-}
-.cartao-header-mid p {
-  margin: 0px 20px;
-}
-
-.cartao-header-right {
-  /* background-color: #00cc66; */
-  height: 100%;
-  width: 50%;
-  line-height: 0px;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-
- 
-}
-
+.cartao {background-color: rgba(255, 255, 255, 0.4); width: 300px;height: 65px;border-radius: 8px;border: 1px solid rgba(128, 128, 128, 0.3); margin: 4px 4px;}
+.cartao-header {width: 100%; background-color: rgba(164, 162, 162, 0.2); height: 65px; display: flex; border-radius: 8px; align-items: center;}
+.cartao-header-left {  width: 120px;height: 100%; display: flex; align-items: center;}
+.cartao-header-mid { height: 100%; width: 300px; line-height: 12px; display: flex; flex-direction: column; justify-content: center;}
+.cartao-header-mid h1 {font-size: 8px; margin: 4px 0px;}
+.cartao-header-mid p {margin: 0px 20px;}
+.cartao-header-right {height: 100%;width: 50%;line-height: 16px;display: flex;flex-direction: column;text-align: center;justify-content: center;align-items: center;}
+.cartao-header-left img {margin: 4px; border-radius: 4px;}
 .cartao-header-right h2 {
-  /* line-height: 0; */
+
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
-  margin: 12px;
+  font-size:12px;
+  margin: 0px;
 }
 .cartao-header-right p {
-  margin: 12px;
-}
-
-
-.cartao-body {
-  line-height:0px;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: start;
-  /* height: 130px; */
-  padding: 4px
-  /* background-color: red; */
-  /* margin-bottom: 4px; */
-
-
-}
-.cartao-body p {
-  /* background-color: red; */
-  /* display: flex; */
-  font-size: 12px;
-}
-.cartao-body h6 {font-size: 12px; font-weight: 500; padding: 0px 4px;}
-.cartao-body-item {
-  /* background-color: red; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* flex-direction: column; */
   margin: 0px;
-  height: 20px;
-  /* height: 200px; */
-
 }
+
+
 
 .cards-stocks {
   /* background-color: red; */
@@ -1000,92 +902,7 @@ padding-bottom: 300px;
 }
 
 @media only screen and (max-width: 500px) {
-.cartao {
-  width: 100vw;
-  height: 400px;
-}
-.cartao-header {height: 50px;}
-.cartao-header-mid{
-  font-size: 30px;
-}
-.cartao-header-mid h1 {
-  /* font-size: 16px; */
-  margin: 12px;
-}
-.cartao-body {
-  height: 100px;
-  width: 75%;
 
-  
-}
-.cartao-body-item h6 {
-  font-size: 12px;
-}
-.cartao-body-item p {
-  font-size: 12px;
-}
-.cartao-header-mid {
-  /* background-color: red; */
-  width: 100%;
-  padding: 0px;
-  display: flex;
-
-}
-.cartao-header-mid h1 {
-  width: 100%;
-  margin: 0px;
-}
-.cartao-header-mid p {
-  padding: 4px;
-  font-size: 16px;
-  margin: 0;
-}
-
-.cartao-header-left img {
-  scale: 1;
-  margin-left: 12px;
-}
-.cartao-header-right p {font-size: 12px;}
-.cartao-header-right h2 {font-size: 16px;}
-#root {
-  overflow-x: hidden;
-}
-.cartao-footer button {
-  width: 100%;
-  /* margin: 0px; */
-  height: 100px;
-  scale: 1;
-  font-size: 10px;
-
-  font-family: 'Roboto';
-}
-.cartao-footer {
-  justify-content: center;
-  background-color: transparent;
-  border: none;
-  width: 25%;
-}
-
-.cartao {
-  margin-left: 0px;
-  border-radius: 0px;
-  border: none;
-  height: 150px;
-  margin: 0px
-}
-.cartao-header-mid {
-  margin-left: 12px;
-}
-
-.cartao-body-item {
-  display: none;
-}
-.cartao-div-respo {
-display: flex;
-justify-content: center;
-background-color: #4a655851;
-border-radius: 8px;
-}
 
 .heading {
   font-size: 1.8rem;

@@ -30,7 +30,7 @@ const Cards = () => {
         ) : (
         results.map(result => {
           
-          console.log(result[1])
+          console.log(result)
 
           return <div key={result.symbol} className='cartao'>
             <div className='cartao-header'>
@@ -47,12 +47,7 @@ const Cards = () => {
               </div>
             </div>
 
-            <div className='cartao-div-respo'> 
-          
-            <div className='cartao-footer'>
-  <button>VER RELATÓRIO</button>
-</div>
-            </div>
+            
         
           </div>
         }))

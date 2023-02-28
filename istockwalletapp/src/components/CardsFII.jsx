@@ -49,13 +49,7 @@ const CardsFII = () => {
               </div>
             </div>
 
-            <div className='cartao-div-respo'>
-
-
-              <div className='cartao-footer'>
-                <button>VER RELATÓRIO</button>
-              </div>
-            </div>
+        
          
          
 
