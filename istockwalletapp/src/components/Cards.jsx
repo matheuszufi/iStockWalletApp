@@ -33,27 +33,30 @@ const Cards = () => {
           
           console.log(result)
 
-          return <Link to={`/wallet/${result.symbol}`} className='link-empresa'>  
-          <div key={result.symbol} className='cartao'>
-             
-            <div className='cartao-header'>
-              <div className='cartao-header-left'> 
-                <img  alt="Stock Logo" src={result.logourl} />
-              </div>
-              <div className='cartao-header-mid'>
+        return <div className='cartao-with-increments'> 
+     
+         
+            <div key={result} className='cartao'>
+           
+              <div className='cartao-header'>
+              <Link to={`/wallet/${result.symbol}`} className='link-empresa'>  
+                <div className='cartao-header-left'> 
+                  <img  alt="Stock Logo" src={result.logourl} />
+                </div>
+                <div className='cartao-header-mid'>
                   <h1>{result.longName}</h1>
                   <p>{result.symbol}</p>
-              </div>
-              <div className='cartao-header-right'>
+                </div>
+                </Link>
+                <div className='cartao-header-right'>
                   <p>Valor:</p>
                   <h2>R${result.regularMarketPrice.toFixed(2)}</h2>
+                </div>
               </div>
             </div>
-
-            
         
-          </div>
-          </Link>
+ 
+        </div>
         }))
     )
   };

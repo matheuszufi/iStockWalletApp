@@ -224,7 +224,7 @@ h1,h2,h3 {font-weight: 600;margin-bottom: 10px;}
 .home-cards {
   display: flex;
   padding: 20px;
-  scale: 0.7;
+  scale: 0.84;
   /* flex-wrap: wrap; */
   align-items: center;
   flex-direction: column;
@@ -785,12 +785,12 @@ h1,h2,h3 {font-weight: 600;margin-bottom: 10px;}
 }
 
 
-.cartao {background-color: rgba(255, 255, 255, 0.4); width: 300px;height: 65px;border-radius: 8px;border: 1px solid rgba(128, 128, 128, 0.3); margin: 4px 4px;}
-.cartao-header {width: 100%; background-color: rgba(164, 162, 162, 0.2); height: 65px; display: flex; border-radius: 8px; align-items: center;}
+.cartao {background-color: rgba(255, 255, 255, 0.4); width: 300px;height: 65px;border-radius: 8px 8px 8px 8px;border: 1px solid rgba(128, 128, 128, 0.3); margin: 4px 4px;}
+.cartao-header {width: 100%; background-color: rgba(164, 162, 162, 0.2); height: 65px; display: flex; border-radius: 0px 8px 8px 0px; align-items: center;}
 .cartao-header-left {  width: 120px;height: 100%; display: flex; align-items: center;}
 .cartao-header-mid { height: 100%; width: 300px; line-height: 12px; display: flex; flex-direction: column; justify-content: center;}
 .cartao-header-mid h1 {font-size: 8px; margin: 4px 0px;}
-.cartao-header-mid p {margin: 0px 20px;}
+.cartao-header-mid p {margin: 4px 20px;}
 .cartao-header-right {height: 100%;width: 50%;line-height: 16px;display: flex;flex-direction: column;text-align: center;justify-content: center;align-items: center;}
 .cartao-header-left img {margin: 4px; border-radius: 4px;}
 .cartao-header-right h2 {
@@ -924,10 +924,66 @@ font-size: 30px;
 }
 
 
+.wallet-header {
+  /* background-color: red; */
+  display: flex;
+  justify-content:space-between;
 
+}
+.wallet-header input {
+  border-radius: 12px;
+  
+  border: none;
+  padding: 12px;
+  margin: 12px 16px;
+  width: 50vw;
+  background-color: rgb(252, 252, 252);
+  box-shadow: 1px 1px 6px rgba(48, 48, 48, 0.4);
+  font-family: 'Roboto';
+  color: rgb(0, 0, 0);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0);
+  /* border: 1px solid rgba(56, 56, 56, 0.6); */
+  /* border-bottom:1px solid rgb(134, 134, 134);
+  border-right:1px solid rgb(134, 134, 134);
+  border-left:1px solid rgb(194, 194, 194);
+  border-top:1px solid rgb(194, 194, 194); */
+}
 
+.wallet-header input::placeholder {
+  color: rgb(0, 0, 0);
+  padding: 0px 4px;
+}
 
+.btn-filtrar {
+  background: rgb(30, 30, 30);
+  padding: 12px;
+  color: white;
+  border-radius: 12px;
+  margin: 0px;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-family: 'Roboto';
 
+}
+
+.btn-minha-carteira button {
+  background-color: rgb(30, 30, 30);
+  border: 1px solid black;
+  color: white;
+  padding: 12px;
+  margin: 12px 12px;
+  border-radius: 12px;
+  width: 300px;
+  font-family: 'Roboto';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+
+}
+.btn-minha-carteira button p {
+  margin: 0px 4px
+}
 
 @media only screen and (max-width: 700px) {
   .navbarTop {
@@ -976,4 +1032,46 @@ padding-bottom: 300px;
   /* align-items: center; */
 }
 
+}
+
+
+
+.cartao-number {
+  background-color: rgba(232, 232, 232, 0.73);
+  width: 64px;
+  height: 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(177, 177, 177, 0.4);
+
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-around;
+  align-items: center;
+  font-size: 12px;
+  /* margin-bottom: -4px; */
+  margin-right: -4px;
+  /* box-shadow: 1px 1px 1px rgba(124, 124, 124, 0.3); */
+  font-family: 'Poppins';
+  transition: 0.4s;
+  cursor: pointer;
+}
+.cartao-number div {
+  margin: 0px 4px
+}
+.cartao-number div:hover {
+  background-color: #2e2e2e;
+  color: white;
+}
+.cartao-with-increments{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+}
+
+.link-empresa {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
 }
