@@ -11,6 +11,7 @@ import Profile from './pages/Profile'
 import Wallet from './pages/Wallet'
 import About from './pages/About'
 import ForgotPassword from './pages/ForgotPassword'
+import AESB3 from './pages/Stocks/AESB3.jsx'
 
 
 
@@ -24,13 +25,14 @@ function App() {
         <Route path='/sign-in' element={<SignIn />} />
         <Route path='/sign-up' element={<SignUp />} />
         <Route path='/about' element={<About />} />
-   
+        
         <Route path='/wallet' element={<PrivateRoute />} >
         <Route path='/wallet' element={<Wallet />} />
+        <Route path='/wallet/AESB3' element={<AESB3 />} />
         </Route>
         
         <Route path='/forgot-password' element={<ForgotPassword/>} />
-        
+   
         <Route path='/profile' element={<PrivateRoute />} >
           <Route path='/profile' element={<Profile />} />
         </Route>

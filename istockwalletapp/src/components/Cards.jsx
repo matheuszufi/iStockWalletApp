@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../index.css';
@@ -32,7 +33,9 @@ const Cards = () => {
           
           console.log(result)
 
-          return <div key={result.symbol} className='cartao'>
+          return <Link to={`/wallet/${result.symbol}`} className='link-empresa'>  
+          <div key={result.symbol} className='cartao'>
+             
             <div className='cartao-header'>
               <div className='cartao-header-left'> 
                 <img  alt="Stock Logo" src={result.logourl} />
@@ -50,6 +53,7 @@ const Cards = () => {
             
         
           </div>
+          </Link>
         }))
     )
   };
