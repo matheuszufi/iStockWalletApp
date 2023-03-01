@@ -34,27 +34,35 @@ const Cards = () => {
           console.log(result)
 
         return <div className='cartao-with-increments'> 
-     
-         
-            <div key={result} className='cartao'>
-           
-              <div className='cartao-header'>
-              <Link to={`/wallet/${result.symbol}`} className='link-empresa'>  
-                <div className='cartao-header-left'> 
-                  <img  alt="Stock Logo" src={result.logourl} />
+                <div key={result} className='cartao'>
+                  <div className='cartao-header'>
+                    <Link to={`/wallet/${result.symbol}`} className='link-empresa'>  
+                    <div className='cartao-header-left'> 
+                      <img  alt="Stock Logo" src={result.logourl} />
+                    </div>
+                    <div className='cartao-header-mid'>
+                      <h1>{result.longName}</h1>
+                      <p>{result.symbol}</p>
+                    </div>
+                    </Link>
+                    <div className='cartao-header-right'>
+                      <div className='cartao-header-right-top'>
+                        <div className='cartao-number'>
+                          <div className='cartao-number-decrement'>-</div>
+                          <div className='cartao-number-number'>0</div>
+                          <div className='cartao-number-increment'>+</div>
+                        </div>
+                      </div>
+                      <div className='cartao-header-right-bottom'>
+                        <p>Valor:</p>
+                        <h2>R${result.regularMarketPrice.toFixed(2)}</h2>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className='cartao-header-mid'>
-                  <h1>{result.longName}</h1>
-                  <p>{result.symbol}</p>
-                </div>
-                </Link>
-                <div className='cartao-header-right'>
-                  <p>Valor:</p>
-                  <h2>R${result.regularMarketPrice.toFixed(2)}</h2>
-                </div>
-              </div>
-            </div>
-        
+                {/* INDICADORES SE ESTAO EM ALTA OU QUEDA */}
+                <div className='isUp'></div>
+            
  
         </div>
         }))

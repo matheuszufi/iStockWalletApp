@@ -2,8 +2,7 @@ import {Link} from 'react-router-dom'
 import {FaQuestionCircle} from 'react-icons/fa'
 import {FaGoogleWallet, FaMoneyBill} from 'react-icons/fa'
 import CardsHome from '../components/CardsHome'
-
-
+// import MinhaImagem from '../assets/png/istockwalletlogo.png';
 
 
 function Home() {
@@ -18,8 +17,9 @@ function Home() {
             <FaGoogleWallet  fill='#00cc66' className='logoicon'/>
             </div>
                 <div className='home-text'>
+                {/* <img className='logoimg' src={MinhaImagem} alt="Descrição da imagem" /> */}
                     <h1>Bem vindo ao iStockWallet</h1>
-                    <p className="pHome">O app que organiza seus investimentos! Aqui você tem em tempo real a cotação de suas ações, de maneira organizada, com indicadores e relatórios empresariais, além de muito mais!</p>
+                    <p className="pHome">O app que organiza seus investimentos! Aqui você tem em tempo real a cotação de suas ações, de maneira organizada, com indicadores e relatórios empresariais, !</p>
                     <Link to='/sign-in' className='btn btn-reverse btn-block'>
                     <FaMoneyBill/> COMEÇAR AGORA
                     </Link>

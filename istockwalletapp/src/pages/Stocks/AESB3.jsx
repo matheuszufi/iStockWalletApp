@@ -32,6 +32,7 @@ const AESB3 = () => {
         results.map(result => {
           return <div key='relatorioAESB3' className='container-stock'>
               <div className='stock-header'>
+                <div className='stock-header-left'>
                 <div className='stock-header-logo'>
                   <img  alt="Stock Logo" src={result.logourl} />
                 </div>
@@ -39,6 +40,8 @@ const AESB3 = () => {
                   <h1>{result.longName}</h1>
                   <p>{result.symbol}</p>
                 </div>
+                </div>
+           
      
                 <div className='stock-header-value'>
                   <p>R${result.regularMarketPrice.toFixed(2)}</p>

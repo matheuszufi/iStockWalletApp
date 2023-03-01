@@ -30,8 +30,6 @@ button {
   margin: 1rem;
 }
 
-
-
 .loadingSpinnerContainer {
   position: fixed;
   top: 0;
@@ -747,7 +745,7 @@ h1,h2,h3 {font-weight: 600;margin-bottom: 10px;}
   flex-direction: column;
   /* align-items: center; */
 }
-
+.wallet-container h3{font-family: 'Roboto';}
 .cards-container {
   display: flex;
   flex-wrap: wrap;
@@ -786,13 +784,23 @@ h1,h2,h3 {font-weight: 600;margin-bottom: 10px;}
 
 
 .cartao {background-color: rgba(255, 255, 255, 0.4); width: 300px;height: 65px;border-radius: 8px 8px 8px 8px;border: 1px solid rgba(128, 128, 128, 0.3); margin: 4px 4px;}
-.cartao-header {width: 100%; background-color: rgba(164, 162, 162, 0.2); height: 65px; display: flex; border-radius: 0px 8px 8px 0px; align-items: center;}
-.cartao-header-left {  width: 120px;height: 100%; display: flex; align-items: center;}
+.cartao-header {width: 100%; background-color: rgba(164, 162, 162, 0.2); height: 65px; display: flex; border-radius: 8px 8px 8px 8px; align-items: center;}
+.cartao-header-left {  width: 120px;height: 100%; display: flex; align-items: center; justify-content: center;}
 .cartao-header-mid { height: 100%; width: 300px; line-height: 12px; display: flex; flex-direction: column; justify-content: center;}
 .cartao-header-mid h1 {font-size: 8px; margin: 4px 0px;}
 .cartao-header-mid p {margin: 4px 20px;}
-.cartao-header-right {height: 100%;width: 50%;line-height: 16px;display: flex;flex-direction: column;text-align: center;justify-content: center;align-items: center;}
-.cartao-header-left img {margin: 4px; border-radius: 4px;}
+.cartao-header-right {
+  user-select: none;
+  height: 100%;
+  width: 50%;
+  line-height: 16px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.cartao-header-left img {margin: 0px 4px; border-radius: 4px; margin-top: -2px;}
 .cartao-header-right h2 {
 
   display: flex;
@@ -879,6 +887,7 @@ h1,h2,h3 {font-weight: 600;margin-bottom: 10px;}
   padding: 24px;
   background-color: rgb(238, 238, 238);
   width: 100%;
+  justify-content: space-between;
 }
 .stock-header-logo {
   /* background-color: red; */
@@ -886,7 +895,9 @@ h1,h2,h3 {font-weight: 600;margin-bottom: 10px;}
   display: flex;
   justify-content: center;
 }
-
+.stock-header-left {
+  display: flex;
+}
 .stock-header img {
   /* scale: 1.5; */
   border: 1px solid rgba(120, 120, 120, 0.4);
@@ -898,6 +909,9 @@ h1,h2,h3 {font-weight: 600;margin-bottom: 10px;}
   /* background-color: red; */
   height: 100%;
   width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 }
 .stock-header-value {
 /* background-color: red; */
@@ -916,18 +930,31 @@ font-size: 30px;
 
 
 
-
+.isUp {
+  background-color: green;
+  width: 200px;
+  height: 4px;
+  border-radius: 8px;
+  margin-top: -6px;
+}
 
 
 .logo-ss {
   display: none;
 }
+.wallet-header h2 {
+  border-bottom: 1px solid rgba(86, 86, 86, 0.6);
+}
 
 
 .wallet-header {
+
   /* background-color: red; */
   display: flex;
-  justify-content:space-between;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  align-items: center;
 
 }
 .wallet-header input {
@@ -936,11 +963,11 @@ font-size: 30px;
   border: none;
   padding: 12px;
   margin: 12px 16px;
-  width: 50vw;
+  min-width: 50vw;
   background-color: rgb(252, 252, 252);
-  box-shadow: 1px 1px 6px rgba(48, 48, 48, 0.4);
+  box-shadow: 1px 1px 4px rgba(48, 48, 48, 0.4);
   font-family: 'Roboto';
-  color: rgb(0, 0, 0);
+  color: rgb(80, 80, 80);
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0);
   /* border: 1px solid rgba(56, 56, 56, 0.6); */
   /* border-bottom:1px solid rgb(134, 134, 134);
@@ -950,7 +977,7 @@ font-size: 30px;
 }
 
 .wallet-header input::placeholder {
-  color: rgb(0, 0, 0);
+  color: rgb(80, 80, 80);
   padding: 0px 4px;
 }
 
@@ -962,14 +989,19 @@ font-size: 30px;
   margin: 0px;
   text-transform: uppercase;
   font-weight: 600;
+  transition: 0.2s;
   font-family: 'Roboto';
+  cursor: pointer;
 
 }
-
+.btn-filtrar:hover {
+  opacity: 0.8;
+}
 .btn-minha-carteira button {
   background-color: rgb(30, 30, 30);
   border: 1px solid black;
   color: white;
+
   padding: 12px;
   margin: 12px 12px;
   border-radius: 12px;
@@ -979,11 +1011,17 @@ font-size: 30px;
   justify-content: center;
   align-items: center;
   font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
 
 }
+.btn-minha-carteira button:hover{opacity: 0.8;}
 .btn-minha-carteira button p {
   margin: 0px 4px
 }
+
+
+
 
 @media only screen and (max-width: 700px) {
   .navbarTop {
@@ -1059,14 +1097,16 @@ padding-bottom: 300px;
   margin: 0px 4px
 }
 .cartao-number div:hover {
-  background-color: #2e2e2e;
+  /* background-color: #2e2e2e; */
   color: white;
 }
 .cartao-with-increments{
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   font-weight: 500;
+  border-radius: 8px;
 }
 
 .link-empresa {
