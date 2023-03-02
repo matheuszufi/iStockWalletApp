@@ -42,7 +42,14 @@
     max-width: 500px;
     display: flex;
     flex-direction: column;
+    justify-self: center;
+    line-height: 16px;
     align-items: start;
+    padding: 0px;
+    margin: 0px
+  }
+  .stock-header-name h1 {
+    /* margin: 0px */
   }
   .stock-header-value {
   width: 150px;
@@ -308,10 +315,14 @@
 
 
 @media only screen and (max-width: 900px) {
-    .stock-header img {scale: 0.5;}
+  
     .stock-header-name {text-align: start;}
     .stock-header-name h1 {
         font-size: 20px;
+
+    }
+    .stock-header-name p {
+        margin: 0px
     }
     .stock-header-value p{font-size: 20px;}
 
@@ -337,4 +348,9 @@
     .stock-indicators-growth-body {
     justify-content: center;
     }
+    .stock-header img {scale: 0.7;}
+}
+
+@media only screen and (max-width: 500px) {
+    .stock-header img {scale: 0.5;}
 }
