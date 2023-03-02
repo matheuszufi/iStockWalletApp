@@ -255,7 +255,10 @@ h1,h2,h3 {font-weight: 600;margin-bottom: 10px;}
   justify-content: center;
   align-items: center;
 }
-
+.home-text h6 {
+  padding: 0px;
+  margin: -12px 0px;
+}
 
 .faicons {
   width: 36px;

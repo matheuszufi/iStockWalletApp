@@ -9,8 +9,10 @@
   .stock-content {
     display: flex;
     flex-wrap: wrap;
+    justify-content: start;
     
   }
+
 
   .stock-header {
     display: flex;
@@ -66,10 +68,14 @@
   .stock-header-value input {
     /* box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.387); */
     border: none;
-    border: 1px solid rgba(128, 128, 128, 0.376);
+    border-top: 1px solid rgba(128, 128, 128, 0.3);
+    border-left: 1px solid rgba(128, 128, 128, 0.3);
+    border-bottom: 1px solid rgba(191, 191, 191, 0.376);
+    border-right: 1px solid rgba(191, 191, 191, 0.376);
     width: 60px;
     margin: 2px;
     height: 24px;
+
 }
 
 .stock-average-price,
@@ -93,6 +99,7 @@
     background-color: rgb(238, 238, 238);
     max-width: 525px;
   
+    height:fit-content;
     border-radius: 0px;
     border: 1px solid rgba(128, 128, 128, 0.2);
     margin: 20px;
@@ -131,6 +138,17 @@
     padding:4px
 
     /* height: ; */
+}
+
+.info-hidden {
+    width: 100px;
+    height: 40px;
+    background-color: red;
+    position: absolute;
+    display: none;
+    transform: translateY(-20px);
+    
+    /* padding: 40px; */
 }
 
 .stock-indicators-body div {
@@ -271,6 +289,7 @@
     display: none;
 }
 
+
 .chevronicon.show {
     transform: rotateZ(180deg);
 }
@@ -278,13 +297,15 @@
 .info-icon {
     position:absolute;
     font-size:20px;
-    padding: 4px
+    padding: 4px;
+    margin: 20px 0px;
+    /* margin-bottom: 20px; */
 }
 
 
 .stock-infos {
     display: flex;
-    width: 200px;
+    width: 300px;
     background-color: rgb(238, 238, 238);
     margin: 20px;
     flex-direction: column;
@@ -303,15 +324,62 @@
     padding:12px 36px;
     margin: 0px;
     font-family: 'Roboto';
-    background-color: rgb(218, 218, 218);
+    /* background-color: rgb(218, 218, 218); */
     width: 100%;
+
     
 }
 
 .stock-infos-body {
     width: 100%;
-    background-color: rgb(159, 60, 60);
+    padding: 12px;
+    /* background-color: red; */
+
+    /* background-color: rgb(222, 222, 222); */
 }
+.stock-infos-body h2 {
+    display: flex;
+    align-items: center;
+    padding: 0px;
+    margin: 0px;
+    font-size: 12px;
+    /* background-color: RED; */
+    justify-content: space-between;
+    height: 17px;
+    
+}
+.stock-infos-body h2 p {
+    margin-left: 4px;
+
+}
+
+.stock-my-wallet {
+    display: flex;
+    width: 300px;
+    background-color: rgb(238, 238, 238);
+    margin: 20px;
+    flex-direction: column;
+    margin: 20px;
+    height: 180px;
+    border: 1px solid rgba(128, 128, 128, 0.2);
+    box-shadow: 1px 1px 2px rgb(0 0 0 / 30%);
+}
+.stock-my-wallet-header {
+    background-color: rgb(218, 218, 218);
+    text-align: start;
+    
+}
+.stock-my-wallet-header h1 {
+    font-size: 12px;
+    padding:12px 36px;
+    margin: 0px;
+    font-family: 'Roboto';
+    /* background-color: rgb(218, 218, 218); */
+    width: 100%;
+}
+
+
+
 
 
 @media only screen and (max-width: 900px) {
@@ -326,16 +394,6 @@
     }
     .stock-header-value p{font-size: 20px;}
 
-    
-
-
-
-
-
-
-
-
-
  
 
 }
@@ -349,8 +407,23 @@
     justify-content: center;
     }
     .stock-header img {scale: 0.7;}
+.stock-indicators {margin-bottom: 100px;}
+.stock-content{ padding: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    
+  
+}
+.stock-wallet-infos, .stock-my-wallet, .stock-infos {justify-content: center;}
 }
 
 @media only screen and (max-width: 500px) {
-    .stock-header img {scale: 0.5;}
+    .stock-wallet-infos, .stock-my-wallet, .stock-infos {width: 100%;margin: 12px 0px;}
+    .stock-header-logo {
+        padding: 0px;
+        margin-left: -24px;
+        /* background-color: red; */
+        width: 100%;
+    }
 }

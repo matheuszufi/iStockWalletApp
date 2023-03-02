@@ -6,7 +6,6 @@ import '../../styles/stock.css';
 import grafico from '../../assets/png/graficoex.jpg'
 
 
-const cheerio = require("cheerio");
 
 
 const AESB3 = () => {
@@ -71,23 +70,45 @@ const AESB3 = () => {
           
             <div className='stock-content'>
           
-          
-          
-          <div className='stock-infos'>
+          <div className='stock-wallet-infos'>
+          <div className='stock-my-wallet'>
+                <div className='stock-my-wallet-header'>
+                  <h1>MEUS DADOS:</h1>
+                </div>
+                <div className='stock-infos-body'>
+                  <h2>VALOR TOTAL DA AÇÃO: <p>R$ 0,00</p></h2>
+                  <h2>Nº DE AÇÕES: <p>0</p></h2>
+                  <h2>PREÇO MÉDIO PAGO: <p>R$ 0,00</p></h2>
+                  <h2>% DO ATIVO NA CARTEIRA: <p>0%</p></h2>
+                  <h2>% DO SETOR NA CARTEIRA: <p>0%</p></h2>
+                  <h2>VALOR DO LUCRO: <p>R$ 0,00</p></h2>
+                  <h2>% DE LUCRO: <p>0%</p></h2>
+                </div>
+              </div>
+              <div className='stock-infos'>
             <div className='stock-infos-header'>
               <h1>INFOS:</h1>
               
             </div>
             <div className='stock-infos-body'>
-
+            <h2>SEGMENTO: <p>Energia Elétrica</p></h2>
+            <h2>SEGUIMENTO DE LISTAGEM: <p>Novo Mercado</p></h2>
+            <h2>PATRIMÔNIO LÍQUIDO: <p>R$5.573.795.000</p></h2>
+            <h2>ATIVOS: <p>R$18.932.446.000</p></h2>
+            <h2>ATIVO CIRCULANTE: <p>R$4.778.502.000</p></h2>
+            <h2>DÍVIDA BRUTA: <p>R$10.895.030.000</p></h2>
+            <h2>DÍVIDA LÍQUIDA: <p>R$7.111.458.000</p></h2>
+            <h2>VALOR DE MERCADO: <p>R$6.133.639.299</p></h2>
+            <h2>VALOR DE FIRMA: <p>R$ 13.245.097.299</p></h2>
+            <h2>Nº TOTAL DE PAPÉIS: <p>R$ 13.245.097.299</p></h2>
+            <h2>FREE FLOAT: <p>52,37%</p></h2>
             </div>
           </div>
            
-           
-           
-           
-           
-            <div className='stock-index'>
+          </div>
+
+
+              <div className='stock-index'>
                 <div className='stock-index-header'>
                   <h1>INDICE:</h1>
                 </div>
@@ -98,10 +119,17 @@ const AESB3 = () => {
        
               </div>
           
+
+           
+           
+           
+           
+    
           
           
           
-            <div className={`stock-indicators ${showIndicators ? 'show' : ''}`}>
+          
+              <div className={`stock-indicators ${showIndicators ? 'show' : ''}`}>
                 <div className='stock-indicators-header'>
                   <h1>INDICADORES:</h1>
                   <FaChevronDown className={`chevronicon ${!showIndicators ? 'show' : ''}`} onClick={() => toggleIndicators()} />
@@ -117,20 +145,20 @@ const AESB3 = () => {
                       <h1>INDICADORES DE VALUATION</h1>
                     </div>
                     <div className='stock-indicators-valuation-body'>
-                    <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>D.Y.</p><p>1,08%</p></div>
-                    <div className='stock-indicator'><p>P/L</p><p>40,09</p></div>
-                    <div className='stock-indicator'><p>PEG RATIO</p><p>-</p></div>
-                    <div className='stock-indicator'><p>P/VP</p><p>1,08</p></div>
-                    <div className='stock-indicator'><p>EV/EBITDA</p><p>-</p></div>
-                    <div className='stock-indicator'><p>EV/EBIT</p><p>18,79</p></div>
-                    <div className='stock-indicator'><p>P/EBITDA</p><p>-</p></div>
-                    <div className='stock-indicator'><p>P/EBIT</p><p>8,60</p></div>
-                    <div className='stock-indicator'><p>VPA</p><p>9,26</p></div>
-                    <div className='stock-indicator'><p>P/ATIVO</p><p>0,32</p></div>
-                    <div className='stock-indicator'><p>LPA</p><p>0,25</p></div>
-                    <div className='stock-indicator'><p>P/SR</p><p>2,11</p></div>
-                    <div className='stock-indicator'><p>P/CAP. GIRO</p><p>2,04</p></div>
-                    <div className='stock-indicator'><p>P/ATIVO CIRC. LIQ</p><p>-0,42</p></div>
+                    <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>D.Y.</p><p>1,08%</p><section className='info-hidden'>oi</section></div>
+                    <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>P/L</p><p>40,09</p></div>
+                    <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>PEG RATIO</p><p>-</p></div>
+                    <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>P/VP</p><p>1,08</p></div>
+                    <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>EV/EBITDA</p><p>-</p></div>
+                    <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>EV/EBIT</p><p>18,79</p></div>
+                    <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>P/EBITDA</p><p>-</p></div>
+                    <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>P/EBIT</p><p>8,60</p></div>
+                    <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>VPA</p><p>9,26</p></div>
+                    <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>P/ATIVO</p><p>0,32</p></div>
+                    <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>LPA</p><p>0,25</p></div>
+                    <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>P/SR</p><p>2,11</p></div>
+                    <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>P/CAP. GIRO</p><p>2,04</p></div>
+                    <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>P/ATIVO CIRC. LIQ</p><p>-0,42</p></div>
                     </div>
                   </div>
 
@@ -141,12 +169,12 @@ const AESB3 = () => {
                       <h1>INDICADORES DE ENDIVIDAMENTO</h1>
                     </div>
                     <div className='stock-indicators-indebtedness-body'>
-                      <div className='stock-indicator'><p>DIV. LIQUIDA/PL</p><p>1,28</p></div>
-                      <div className='stock-indicator'><p>DIV. LIQUIDA/ EBITDA</p><p>-</p></div>
-                      <div className='stock-indicator'><p>DIV. LIQUIDA/ EBIT</p><p>10,19</p></div>
-                      <div className='stock-indicator'><p>PL/ATIVOS</p><p>0,29</p></div>
-                      <div className='stock-indicator'><p>PASSIVOS/ ATIVOS</p><p>0,71</p></div>
-                      <div className='stock-indicator'><p>LIQ. CORRENTE</p><p>2,60</p></div>
+                      <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>DIV. LIQUIDA/PL</p><p>1,28</p></div>
+                      <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>DIV. LIQUIDA/ EBITDA</p><p>-</p></div>
+                      <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>DIV. LIQUIDA/ EBIT</p><p>10,19</p></div>
+                      <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>PL/ATIVOS</p><p>0,29</p></div>
+                      <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>PASSIVOS/ ATIVOS</p><p>0,71</p></div>
+                      <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>LIQ. CORRENTE</p><p>2,60</p></div>
                     </div>
                   </div>
                   
@@ -157,10 +185,10 @@ const AESB3 = () => {
                       <h1>INDICADORES DE EFICIENCIA</h1>
                     </div>
                     <div className='stock-indicators-efficiency-body'>
-                      <div className='stock-indicator'><p>M. BRUTA</p><p>31,84%</p></div>
-                      <div className='stock-indicator'><p>M. EBITDA</p><p>-%</p></div>
-                      <div className='stock-indicator'><p>M. EBIT</p><p>24,53%</p></div>
-                      <div className='stock-indicator'><p>M. LIQUIDA</p><p>5,26%</p></div>
+                      <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>M. BRUTA</p><p>31,84%</p></div>
+                      <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>M. EBITDA</p><p>-%</p></div>
+                      <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>M. EBIT</p><p>24,53%</p></div>
+                      <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>M. LIQUIDA</p><p>5,26%</p></div>
                     </div>
                   </div>
 
@@ -171,10 +199,10 @@ const AESB3 = () => {
                       <h1>INDICADORES DE RENTABILIDADE</h1>
                     </div>
                     <div className='stock-indicators-profitability-body'>
-                      <div className='stock-indicator'><p>ROE:</p><p>2,69%</p></div>
-                      <div className='stock-indicator'><p>ROA:</p><p>0,795</p></div>
-                      <div className='stock-indicator'><p>ROIC:</p><p>3,82%</p></div>
-                      <div className='stock-indicator'><p>GIRO:</p><p>0,15</p></div>
+                      <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>ROE:</p><p>2,69%</p></div>
+                      <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>ROA:</p><p>0,795</p></div>
+                      <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>ROIC:</p><p>3,82%</p></div>
+                      <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>GIRO:</p><p>0,15</p></div>
                     </div>
                   </div>
 
@@ -185,8 +213,8 @@ const AESB3 = () => {
                       <h1>INDICADORES DE CRESCIMENTO</h1>
                     </div>
                     <div className='stock-indicators-growth-body'>
-                      <div className='stock-indicator'><p>CAGR RECEITAS 5 ANOS:</p><p>-%</p></div>
-                      <div className='stock-indicator'><p>CAGR LUCROS 5 ANOS:</p><p>-%</p></div>
+                      <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>CAGR RECEITAS 5 ANOS:</p><p>-%</p></div>
+                      <div className='stock-indicator'><FaQuestionCircle className='info-icon'/><p>CAGR LUCROS 5 ANOS:</p><p>-%</p></div>
                     </div>
                   </div>
       
@@ -194,7 +222,7 @@ const AESB3 = () => {
                 </div>
               </div>
 
-       
+             
 
             </div>
           
