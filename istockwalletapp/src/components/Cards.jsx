@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../index.css';
+import grafico from '../assets/png/graficoex.jpg'
 
 const Cards = () => {
     const [results, setResults] = useState(null);
@@ -58,10 +59,13 @@ const Cards = () => {
                         <h2>R${result.regularMarketPrice.toFixed(2)}</h2>
                       </div>
                     </div>
+
                   </div>
                 </div>
-                {/* INDICADORES SE ESTAO EM ALTA OU QUEDA */}
-                <div className='isUp'></div>
+               
+                <div className='grafico'>
+                  <img src={grafico} />
+                </div>
             
  
         </div>

@@ -15,7 +15,7 @@ function Wallet() {
           <input type="text" placeholder='EX: ABEV3'></input>
           <button type='submit' className='btn-filtrar'><FaSearch/> Filtrar</button>
         </form>
-        <h2>Patrimônio: R$1.000.000,00</h2>
+        <h2>PATRIMÔNIO: R$0,00</h2>
         <Link to={`/my-wallet`} className='btn-minha-carteira'><button type=''><FaWallet/><p>MINHA CARTEIRA</p></button></Link>
       </div>
       <div className='cards-container'>
