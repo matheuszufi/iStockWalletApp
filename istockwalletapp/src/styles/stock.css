@@ -419,11 +419,14 @@
 }
 
 @media only screen and (max-width: 500px) {
-    .stock-wallet-infos, .stock-my-wallet, .stock-infos {width: 100%;margin: 12px 0px;}
+    .stock-wallet-infos, .stock-my-wallet, .stock-infos {width: 99%;margin: 12px 0px;}
     .stock-header-logo {
         padding: 0px;
         margin-left: -24px;
         /* background-color: red; */
         width: 100%;
+    }
+    .stock-my-wallet, .stock-infos {
+        margin-left: 2px;
     }
 }

@@ -1,17 +1,53 @@
-import { Link } from 'react-router-dom'
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {FaChevronDown, FaQuestionCircle, FaPenSquare} from 'react-icons/fa'
 import '../../styles/stock.css';
 import grafico from '../../assets/png/graficoex.jpg'
-
+// import { db } from '../../firebase.config'
+// import { updateDoc, doc } from 'firebase/firestore'
 
 
 
 const AESB3 = () => {
+    // const auth = getAuth()
     const [showIndicators, setShowIndicators] = useState(false);
     const [results, setResults] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+  //   const [formData, setFormData] = useState({
+  //     ativos: auth.currentUser.ativos.AESB3.numAtivos,
+  //     precoMedio: auth.currentUser.ativos.AESB3.precoMedio
+  //   })
+
+  //   const { ativos, precoMedio } = formData
+
+  //   const onSubmit = async () => {
+  //     try {
+  //         if (auth.currentUser.ativos.AESB3.numAtivos !== ativos) {
+  //             await updateProfile(auth.currentUser, { ativos: name})
+
+  //             const userRef = doc(db, 'users', auth.currentUser.uid)
+  //             await updateDoc(userRef, {
+  //                 name
+  //             })
+  //         }
+
+
+  //     } catch (error) {
+  //         toast.error('Não foi possivel alterar os detalhes')
+  //     }
+  // }
+
+  // const onChange = (e) => {
+  //   setFormData((prevState) => ({
+  //     ...prevState,
+  //     [e.target.id]: e.target.value,
+  //   }))
+  // }
+
+
+
+
+
 
 
     const toggleIndicators = () => {
@@ -113,7 +149,7 @@ const AESB3 = () => {
                   <h1>INDICE:</h1>
                 </div>
                 <div className='stock-index-body'>
-                  <img src={grafico} />
+                  <img alt="Grafico da empresa"src={grafico} />
          
                 </div>
        
