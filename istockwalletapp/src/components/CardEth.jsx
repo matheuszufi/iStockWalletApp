@@ -3,18 +3,20 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../index.css';
 import grafico from '../assets/png/graficoex.jpg'
+import ETHicon from '../assets/png/eth.png'
 import PersonalInfosCard from './PersonalInfosCard';
+import {FaEthereum} from 'react-icons/fa'
 
-const Cards = () => {
-    const [results, setResults] = useState(null);
+const CardETH = () => {
+    const [result, setResult] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
   
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await axios.get("https://brapi.dev/api/quote/AESB3,ABEV3,BBAS3,BBSE3,BBDC4,CPLE6,EGIE3,FLRY3,HYPE3,ITUB4,ITSA4,KLBN11,MDIA3,MGLU3,ODPV3,PETR4,PSSA3,RADL3,SAPR11,TAEE11,VALE3,WEGE3?range=max&fundamental=true&dividends=true")
-          const results = response.data.results
-          setResults(results);
+          const response = await axios.get("https://brapi.dev/api/v2/currency?currency=USD-BRL%2CEUR-BRL%2CETH-BRL%2CBTC-BRL")
+          const result = response.data.currency
+          setResult(result);
      
           setIsLoading(false);
         } catch (error) {
@@ -30,31 +32,31 @@ const Cards = () => {
     return (
         isLoading ? (
           <p>Carregando...</p>
-        ) : (
-        results.map(result => {
-          console.log(result)
-        return  <div className='cartao-with-increments'> 
+        ) : (   <div className='cartao-with-increments'> 
                   <div key={result} className='cartao'>
                     <div className='cartao-header'>
-                      <Link to={`/wallet/${result.symbol}`} className='link-empresa'>  
+                      <Link to={`/wallet/${result[2].fromCurrency}`} className='link-empresa'>  
                       <div className='cartao-header-left'> 
-                        <img  alt="Stock Logo" src={result.logourl} />
+                      <div className='currency-img'> 
+                      <FaEthereum />
+                      </div>
+        
                       </div>
                       <div className='cartao-header-mid'>
-                        <h1>{result.longName}</h1>
-                        <p>{result.symbol}</p>
+                        <h1>{result[2].name}</h1>
+                        <p>{result[2].fromCurrency}</p>
                         <span className='stock-percent-profit'>0,00%</span>
                       </div>
                       </Link>
                       <div className='cartao-header-right'>
                         <div className='cartao-header-right-top'>
                           <div className='cartao-number'>
-                            <PersonalInfosCard />
+                          <PersonalInfosCard />
                           </div>
                         </div>
                         <div className='cartao-header-right-bottom'>
-                          <p>VALOR ATUAL:</p>
-                          <h2>R${result.regularMarketPrice.toFixed(2)}</h2>
+                          <p>Valor:</p>
+                          <h2>R${result[2].askPrice}</h2>
                         </div>
                       </div>
                     </div>
@@ -63,9 +65,9 @@ const Cards = () => {
                     <img src={grafico} />
                   </div>
                 </div>
-        }))
+        )
     )
   };
   
-  export default Cards;
+  export default CardETH;
   

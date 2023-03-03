@@ -3,7 +3,7 @@ import {FaQuestionCircle} from 'react-icons/fa'
 import {FaGoogleWallet, FaMoneyBill} from 'react-icons/fa'
 import CardsHome from '../components/CardsHome'
 // import MinhaImagem from '../assets/png/istockwalletlogo.png';
-
+import CardDollarHome from '../components/CardDollarHome'
 
 function Home() {
     return (
@@ -31,6 +31,7 @@ function Home() {
                 </div>
             
                 <div className='home-cards'>
+                    <CardDollarHome />
                 <CardsHome />
                 </div>
             </div>

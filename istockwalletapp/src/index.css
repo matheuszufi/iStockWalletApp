@@ -118,7 +118,7 @@ button {
 
 .navbarTopListItemName,
 .navbarTopListItemNameActive {margin-top: 0.25rem; font-size: 14px; font-weight: 600; color: #363636;}
-.navbarTopListItemNameActive {color: #00cc66; }
+.navbarTopListItemNameActive {color: gold; }
 
 .navbarListItemsTop {
   display: flex;
@@ -786,12 +786,26 @@ h1,h2,h3 {font-weight: 600;margin-bottom: 10px;}
 }
 
 
-.cartao {background-color: rgba(255, 255, 255, 0.4); width: 300px;height: 65px;border: 1px solid rgba(128, 128, 128, 0.3); margin: 4px 4px;}
+.cartao {
+  background-color: rgba(255, 255, 255, 0.4); 
+  width: 300px;
+  height: 65px;
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  margin: 4px 8px;
+  /* box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7), inset 1px 1px 2px rgba(255, 255, 255, 0.9); */
+}
 .cartao-header {width: 100%; background-color: rgba(164, 162, 162, 0.2); height: 65px; display: flex; border-radius: 0px; align-items: center;}
 .cartao-header-left {  width: 120px;height: 100%; display: flex; align-items: center; justify-content: center;}
 .cartao-header-mid { height: 100%; width: 300px; line-height: 12px; display: flex; flex-direction: column; justify-content: center;}
 .cartao-header-mid h1 {font-size: 8px; margin: 4px 0px;}
 .cartao-header-mid p {margin: 4px 20px;}
+.cartao-header-mid span {
+  font-family: 'Roboto';
+  font-size: 11px;
+  margin-top: 2px;
+  font-weight: 400;
+}
+
 .cartao-header-right {
   user-select: none;
   height: 100%;
@@ -800,12 +814,14 @@ h1,h2,h3 {font-weight: 600;margin-bottom: 10px;}
   display: flex;
   flex-direction: column;
   text-align: center;
-  justify-content: space-evenly;
+  justify-content: center;
+  font-family: 'Roboto';
   align-items: center;
+  margin-top: -2px;
 }
 .cartao-header-left img {margin: 0px 4px; border-radius: 4px; margin-top: -2px;}
 .cartao-header-right h2 {
-
+  font-family: 'Roboto';
   display: flex;
   justify-content: center;
   align-items: center;
@@ -815,9 +831,43 @@ h1,h2,h3 {font-weight: 600;margin-bottom: 10px;}
 .cartao-header-right p {
   margin: 0px;
 }
+.cartao-header-right-bottom {
+  background-color: rgba(109, 109, 109, 0.77);
+  width: 88px;
+  height: 28px;
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4), inset 1px 1px 2px rgba(255, 255, 255, 0.4);
+  border-right: 1px solid rgba(70, 70, 70, 0.5);
+  border-bottom: 1px solid rgba(70, 70, 70, 0.5);
+  border-top: 1px solid rgba(193, 193, 193, 0.4);
+  border-left: 1px solid rgba(195, 195, 195, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  padding: 0px;
+  margin-left: 4px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+}
 
-
-
+.cartao-header-right-bottom p {
+  font-size: 10px;
+  height: 12px;
+  /* background-color: red; */
+  margin-top: -2px;
+  padding: 0px 10px
+}
+.cartao-header-right-bottom h2 {
+  font-weight: 400;
+  margin-top: 2px;
+  margin-right: 1px;
+}
+.cards-currency {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
 .cards-stocks {
   /* background-color: red; */
   width: 100%;
@@ -830,13 +880,14 @@ h1,h2,h3 {font-weight: 600;margin-bottom: 10px;}
 .cards-fiis {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .cards-etfs {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  /* justify-content: center; */
+  justify-content: center;
 }
 
 .cartao-footer {
@@ -877,20 +928,26 @@ h1,h2,h3 {font-weight: 600;margin-bottom: 10px;}
   margin-top: 40px;
 }
 
-
-
-
-
 .grafico{
-  background-color: rgb(255, 255, 255);
-  width: 120px;
+  /* background-color: rgb(255, 255, 255); */
+  width: 112px;
   height: 65px;
   /* border-radius: 8px; */
-  margin-left: -4px;
+  margin-left: -8px;
+  /* z-index: -10; */
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7), inset 1px 1px 2px rgba(255, 255, 255, 0.7);
+  border-right: 1px solid rgba(90, 90, 90, 0.5);
+  border-bottom: 1px solid rgba(90, 90, 90, 0.5);
+  border-top: 1px solid rgba(120, 120, 120, 0.4);
+  border-left: 1px solid rgba(120, 120, 120, 0.4);
+  transition: 0.2s;
  
 }
+.grafico:hover {
+  scale: 2.5;
+}
 .grafico img {
-  width: 120px;
+  width: 112px;
   /* border-radius: 8px; */
   height: 65px;
   /* opacity: 0.6; */
@@ -900,7 +957,7 @@ h1,h2,h3 {font-weight: 600;margin-bottom: 10px;}
 }
 .wallet-header h2 {
   border-bottom: 1px solid rgba(86, 86, 86, 0.6);
-  font-size: 16px;
+  font-size: 12px;
   font-family: 'Roboto';
 }
 
@@ -987,16 +1044,39 @@ h1,h2,h3 {font-weight: 600;margin-bottom: 10px;}
 
 
 
+.currency-img {
+  width: 65px;
+  height: 65px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+  font-size: 30px;
+  font-family: 'Roboto';
+  /* overflow: hidden; */
+  /* margin-left: 4px; */
+  /* border-radius: 4px; */
+}
+
+.usa-icon {
+width: 80px;
+  
+}
+
+.euro-icon {
+  width: 80px;
+}
+.btc-icon {
+  width: 60px;
+  
+}
 
 
 
-
-
-
-
-
-
-
+.eth-icon{
+  width: 30px;
+}
 
 
 
@@ -1064,52 +1144,84 @@ padding-bottom: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  
   /* align-items: center; */
 }
+.cards-container {margin-left: -8px;}
 
 }
 
 
 
 .cartao-number {
-  background-color: rgba(232, 232, 232, 0.73);
-  width: 64px;
-  height: 16px;
-  /* border-radius: 8px; */
-  border: 1px solid rgba(177, 177, 177, 0.4);
-
+  /* background-color: rgba(38, 38, 38, 0.73); */
+  width: 88px;
+  height: 28px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-right: 1px solid rgba(90, 90, 90, 0.5);
+  border-bottom: 1px solid rgba(90, 90, 90, 0.5);
+  border-top: 1px solid rgba(120, 120, 120, 0.4);
+  border-left: 1px solid rgba(120, 120, 120, 0.4);
+/* margin: 2px 0px; */
+color: black;
   display: flex;
-  /* flex-direction: column; */
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  font-size: 12px;
+  font-size: 10px;
   /* margin-bottom: -4px; */
   margin-right: -4px;
-  /* box-shadow: 1px 1px 1px rgba(124, 124, 124, 0.3); */
-  font-family: 'Poppins';
+  box-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7), inset 1px 1px 2px rgba(0, 0, 0, 0.7);
+  font-family: 'Roboto';
   transition: 0.4s;
   cursor: pointer;
+  /* line-height: 2px; */
 }
 .cartao-number div {
-  margin: 0px 4px
+  /* margin: 0px 4px */
 }
 .cartao-number div:hover {
   /* background-color: #2e2e2e; */
-  color: white;
 }
 .cartao-with-increments{
   display: flex;
   /* flex-direction: column; */
   justify-content: center;
   align-items: center;
+
   font-weight: 500;
-  border-radius: 8px;
+  /* border-radius: 8px; */
 
 }
+
 
 .link-empresa {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 200px;
+}
+
+.card-personal-infos {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+
+}
+.card-personal-infos-top {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  height: 12px;
+  /* background-color: red; */
+}
+
+.card-personal-infos-bottom {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  /* height: 12px; */
+
 }
