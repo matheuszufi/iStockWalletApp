@@ -118,7 +118,7 @@ button {
 
 .navbarTopListItemName,
 .navbarTopListItemNameActive {margin-top: 0.25rem; font-size: 14px; font-weight: 600; color: #363636;}
-.navbarTopListItemNameActive {color: gold; }
+.navbarTopListItemNameActive {color: rgb(255, 228, 77); }
 
 .navbarListItemsTop {
   display: flex;

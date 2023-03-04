@@ -25,17 +25,17 @@ function Navbar() {
                 <nav className="navbarNavTop">
                     <ul className='navbarListItemsTop'>
                         <li className='navbarListItemTop' onClick={() => navigate('/')}>
-                            <FaGoogleWallet className='faicons' fill={pathMatchRoute('/') ? 'gold' : 'rgb(20,20,20)'} width='36px' height='36px'/>
+                            <FaGoogleWallet className='faicons' fill={pathMatchRoute('/') ? 'rgb(255, 228, 77)' : 'rgb(20,20,20)'} width='36px' height='36px'/>
                             <p className={pathMatchRoute('/') ? 'navbarTopListItemNameActive' : 'navbarTopListItemName'}>Início</p>
                         </li>
                         <div className='navRight'>
                         <li className='navbarListItemTop' onClick={() => navigate('/wallet')}>
-                        <FaWallet fill={pathMatchRoute('/wallet') ?'gold' : 'rgb(20,20,20)'} width='20px' height='20px'/>
+                        <FaWallet fill={pathMatchRoute('/wallet') ?'rgb(255, 228, 77)' : 'rgb(20,20,20)'} width='20px' height='20px'/>
                             <p className={pathMatchRoute('/wallet') ? 'navbarTopListItemNameActive' : 'navbarTopListItemName'}>Carteira</p>
                         </li>
 
                         <li className='navbarListItemTop' onClick={() => navigate('/profile')}>
-                            <PersonOutlineIcon fill={pathMatchRoute('/profile') ? 'gold' : 'rgb(20,20,20)'} width='24px' height='24px'/>
+                            <PersonOutlineIcon fill={pathMatchRoute('/profile') ? 'rgb(255, 228, 77)' : 'rgb(20,20,20)'} width='24px' height='24px'/>
                             <p className={pathMatchRoute('/profile') ? 'navbarTopListItemNameActive' : 'navbarTopListItemName'}>Perfil</p>
                         </li>
                         </div>
