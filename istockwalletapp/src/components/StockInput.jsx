@@ -67,7 +67,7 @@ const StockInput = () => {
   return ( isLoading ? (
     <p>Carregando...</p>
   ) : (
-    <div className='stock-header-value'>
+    <form className='stock-header-value'>
         <div className='stock-amount'>
             <label for="stock-amount">N° DE AÇÕES:</label>
             <input id="stock-amount" type="number"></input>
@@ -78,7 +78,7 @@ const StockInput = () => {
             <input id="stock-average-price"></input>
             <FaPenSquare />
         </div>
-  </div>
+  </form>
   ))
 }
 
