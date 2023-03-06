@@ -1,85 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import {FaPenSquare} from 'react-icons/fa'
-import axios from 'axios';
-// import { db } from '../../firebase.config'
-// import { updateDoc, doc } from 'firebase/firestore'
+import React, { useState } from 'react';
 
+function NumberInput() {
+  const [valueAESB3, setValueAESB3] = useState(localStorage.getItem('AESB3{quantidade}') || '');
+  
+  const handleChange = event => {
+    setValueAESB3(event.target.value);
+  };
 
-const StockInput = () => {
-    // const auth = getAuth()
-    const [results, setResults] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
-      //   const [formData, setFormData] = useState({
-  //     ativos: auth.currentUser.ativos.AESB3.numAtivos,
-  //     precoMedio: auth.currentUser.ativos.AESB3.precoMedio
-  //   })
+  const handleSubmit = event => {
+    event.preventDefault();
+    localStorage.setItem('AESB3{quantidade}', valueAESB3);
+  };
 
-  //   const { ativos, precoMedio } = formData
+  console.log(localStorage)
 
-  //   const onSubmit = async () => {
-  //     try {
-  //         if (auth.currentUser.ativos.AESB3.numAtivos !== ativos) {
-  //             await updateProfile(auth.currentUser, { ativos: name})
-
-  //             const userRef = doc(db, 'users', auth.currentUser.uid)
-  //             await updateDoc(userRef, {
-  //                 name
-  //             })
-  //         }
-
-
-  //     } catch (error) {
-  //         toast.error('Não foi possivel alterar os detalhes')
-  //     }
-  // }
-
-  // const onChange = (e) => {
-  //   setFormData((prevState) => ({
-  //     ...prevState,
-  //     [e.target.id]: e.target.value,
-  //   }))
-  // }
-
-
-    useEffect(() => {
-
-    
-        const fetchData = async () => {    
-          
-          try {
-            const response2 = await axios.get("https://brapi.dev/api/quote/AESB3?range=max&fundamental=true&dividends=true")
-            const results2 = response2.data.results
-            
-            setResults(results2);
-            setIsLoading(false);   
-            
-          } catch (error) {
-            console.error('Erro ao fazer requisição:', error);
-            setIsLoading(false);
-          }
-        };
-    
-        fetchData();
-    
-      }, []);
-    
-
-  return ( isLoading ? (
-    <p>Carregando...</p>
-  ) : (
-    <form className='stock-header-value'>
-        <div className='stock-amount'>
-            <label for="stock-amount">N° DE AÇÕES:</label>
-            <input id="stock-amount" type="number"></input>
-            <FaPenSquare />
-        </div>
-        <div className='stock-average-price'>
-            <label for="stock-average-price">PREÇO MÉDIO:</label>
-            <input id="stock-average-price"></input>
-            <FaPenSquare />
-        </div>
-  </form>
-  ))
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Número:
+        <input
+          type="AESB3/quantidade"
+          value={valueAESB3}
+          onChange={handleChange}
+        />
+      </label>
+      <button type="submit">Salvar</button>
+      {/* <p>{localStorage.getItem('AESB3{quantidade}')}</p> */}
+    </form>
+  );
 }
 
-export default StockInput
+export default NumberInput;
