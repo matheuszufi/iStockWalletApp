@@ -6,6 +6,7 @@ import grafico from '../../assets/png/graficoex.jpg'
 import StockInput from '../../components/StockInput';
 import StockMeusDados from '../../components/StockMeusDados';
 
+
 const AESB3 = () => {
 
     const [showIndicators, setShowIndicators] = useState(false);
@@ -187,6 +188,8 @@ const AESB3 = () => {
                       <div className={`division-indicators ${!showIndicators ? 'show' : ''}`}></div>
                     </div>
               </div>
+
+              <DbWallet />
 
             </div>
         

@@ -379,7 +379,48 @@
     width: 100%;
 }
 
+.form-stocks {
+    display: flex;
+    
+    flex-direction: column;
+    justify-content: center;
+    /* background-color: red; */
+    align-items: center;
+    width: 100%;
+}
+.form-stocks p {
+    font-size: 12px;
+    margin: 0px;
+    font-weight: 600;
+    font-family: 'Roboto';
+    padding: 0px;
+    /* justify-content: space-between; */
+}
+.form-stocks form {
+    display: flex;
+    justify-content: center; 
+    height: 32px;
+    align-items: center;
+    /* width: 100%; */
+    /* background-color: red; */
+}
+.form-stocks label {
+    display: flex;
+flex-wrap: nowrap;
+/* background-color: red; */
+align-items: center;
+/* justify-content: center; */
+/* justify-content: space-between; */
 
+
+
+}
+.form-stock-icon {
+    font-size: 20px;
+    /* background-color: red; */
+    margin-left: -20px;
+  
+}
 
 
 
