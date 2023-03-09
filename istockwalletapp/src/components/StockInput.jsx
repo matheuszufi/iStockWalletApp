@@ -18,7 +18,7 @@ function StockInput() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    DbWallet.push(event);
+    // DbWallet.push(event);
     localStorage.setItem('AESB3qtdd', valueAESB3);
     window.location.reload();
     console.log(event)

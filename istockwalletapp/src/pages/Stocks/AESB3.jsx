@@ -189,7 +189,7 @@ const AESB3 = () => {
                     </div>
               </div>
 
-              <DbWallet />
+        
 
             </div>
         
