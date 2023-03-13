@@ -148,7 +148,7 @@ button {
 .heading {
   /* font-size: 1.8rem; */
   font-weight: 700;
-  margin-bottom: 50px;
+  /* margin-bottom: 50px; */
   /* padding: 0 20px; */
   text-align: center;
   /* margin-top: 1rem; */
@@ -160,7 +160,7 @@ button {
   height: 700px;
   /* background-color: red; */
 
-
+  /* margin: 60px 0px; */
 
 
 }
@@ -238,10 +238,10 @@ h1,h2,h3 {font-weight: 600;margin-bottom: 10px;}
   align-items: center;
   width: 100%;
   /* background-color: rgba(128, 128, 128, 0.237); */
-  /* background: url(./assets/png/banner.png); */
-  /* background-repeat: no-repeat; */
-  /* background-position: center; */
-  /* background-size: cover; */
+  background: url(./assets/png/hero.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   border-bottom: 1px solid rgba(128, 128, 128, 0.5);
   /* border-top: 1px solid rgba(128, 128, 128, 0.5); */
   /* margin-top: 20px; */
@@ -1132,7 +1132,9 @@ padding-bottom: 300px;
 }
 
 @media only screen and (max-width: 500px) {
-
+.home-content {
+  margin-top: 160px;
+}
 
 .heading {
   font-size: 1.8rem;
