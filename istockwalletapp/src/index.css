@@ -118,7 +118,7 @@ button {
 
 .navbarTopListItemName,
 .navbarTopListItemNameActive {margin-top: 0.25rem; font-size: 14px; font-weight: 600; color: #363636;}
-.navbarTopListItemNameActive {color: rgb(255, 228, 77); }
+.navbarTopListItemNameActive {color: #00cc66; }
 
 .navbarListItemsTop {
   display: flex;
@@ -242,6 +242,7 @@ h1,h2,h3 {font-weight: 600;margin-bottom: 10px;}
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+/* opacity: 0.8; */
   border-bottom: 1px solid rgba(128, 128, 128, 0.5);
   /* border-top: 1px solid rgba(128, 128, 128, 0.5); */
   /* margin-top: 20px; */
