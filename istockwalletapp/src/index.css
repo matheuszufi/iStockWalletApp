@@ -168,9 +168,9 @@ button {
 
 .btn {
   padding: 10px 20px;
-  border: 1px solid #000;
+  border: 1px solid #5b5b5b;
   border-radius: 5px;
-  background: #000000e2;
+  background: rgba(40, 40, 40, 0.9);
   color: #fff;
   font-size: 16px;
   font-weight: 700;
@@ -180,14 +180,28 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+
+#btn-div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 0px;
+}
+#btn-div a {
+  width: 90%;
 }
 
 .btn svg {margin-right: 8px;}
-.btn-reverse {background: #ffffffbc;color: #000;}
+.btn-reverse {background: #ffffffe9;color:#388c00; border: 1px solid #00cc66; box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);}
 .btn-block {width: 100%; margin-bottom: 20px;}
 .btn-sm {padding: 5px 15px;font-size: 13px;}
 .btn-danger {background: darkred;border: none;}
-.btn-back {width: 150px;margin-bottom: 20px;}
+.btn-back {width: 250px;margin-bottom: 20px;}
 .btn:hover {transform: scale(0.98);}
 
 .loadingSpinner {
@@ -254,11 +268,12 @@ h1,h2,h3 {font-weight: 600;margin-bottom: 10px;}
   display: flex;
   flex-direction: column;
   justify-content: center;
+  color:#2c2c2c;
   align-items: center;
 }
-.home-text h6 {
+.home-text h1 {
   padding: 0px;
-  margin: -12px 0px;
+  
 }
 
 .faicons {

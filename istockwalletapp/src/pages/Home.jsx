@@ -19,8 +19,9 @@ function Home() {
                 <div className='home-text'>
                 {/* <img className='logoimg' src={MinhaImagem} alt="Descrição da imagem" /> */}
                     <h1>Bem vindo ao iStockWallet</h1>
-                    <h6 className="pHome">Praticidade em um lugar só!</h6>
+             
                     <p className="pHome">O app que organiza seus investimentos! Aqui você tem em tempo real a cotação de suas ações, de maneira organizada, com indicadores e relatórios empresariais, !</p>
+                    <div id="btn-div">
                     <Link to='/sign-in' className='btn btn-reverse btn-block'>
                     <FaMoneyBill/> COMEÇAR AGORA
                     </Link>
@@ -28,6 +29,7 @@ function Home() {
                     <Link to='/about' className='btn btn-block'>
                     <FaQuestionCircle/>QUEM SOMOS
                     </Link>
+                    </div>
                 </div>
             
                 <div className='home-cards'>
