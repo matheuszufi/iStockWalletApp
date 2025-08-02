@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Home from './pages/Home'
+import Dashboard from './pages/Dashboard'
+import Stock from './pages/Stock'
 import Navbar from './components/Navbar'
 import Navbar2 from './components/Navbar2'
 import SignIn from './pages/SignIn'
@@ -14,8 +16,6 @@ import ForgotPassword from './pages/ForgotPassword'
 import AESB3 from './pages/Stocks/AESB3.jsx'
 import ABEV3 from './pages/Stocks/ABEV3.jsx'
 
-
-
 function App() {
   return (
     <>
@@ -26,6 +26,14 @@ function App() {
         <Route path='/sign-in' element={<SignIn />} />
         <Route path='/sign-up' element={<SignUp />} />
         <Route path='/about' element={<About />} />
+        
+        <Route path='/dashboard' element={<PrivateRoute />} >
+          <Route path='/dashboard' element={<Dashboard />} />
+        </Route>
+        
+        <Route path='/stock' element={<PrivateRoute />} >
+          <Route path='/stock' element={<Stock />} />
+        </Route>
         
         <Route path='/wallet' element={<PrivateRoute />} >
         <Route path='/wallet' element={<Wallet />} />

@@ -28,7 +28,8 @@ const CardDollarHome = () => {
     return (
         isLoading ? (
           <p>Carregando...</p>
-        ) : (   <div className='cartao-home'>
+        ) : result && result.length > 0 ? (   
+                <div className='cartao-home'>
                     <div className='cartao-home-header'>
                         <div className='cartao-home-header-left'> 
                         <div className='currency-img'>
@@ -37,17 +38,21 @@ const CardDollarHome = () => {
                          
                         </div>
                         <div className='cartao-home-header-mid'>
-                            <h1>{result[0].name}</h1>
-                            <p>{result[0].fromCurrency}</p>
+                            <h1>{result[0]?.name || 'Dólar'}</h1>
+                            <p>{result[0]?.fromCurrency || 'USD'}</p>
                             
                         </div>
                         <div className='cartao-home-header-right'>
                             <p>Valor:</p>
-                            <h2>R${result[0].askPrice}</h2>
+                            <h2>R${result[0]?.askPrice || 'N/A'}</h2>
                         </div>
                       
                     </div> 
                 </div>
+        ) : (
+          <div className='cartao-home'>
+            <p>Erro ao carregar dados do câmbio</p>
+          </div>
         )
     )
   };

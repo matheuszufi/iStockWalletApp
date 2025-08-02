@@ -32,20 +32,20 @@ const CardsFII = () => {
     return (
         isLoading ? (
           <p>Carregando...</p>
-        ) : (
+        ) : results && results.length > 0 ? (
         results.map(result => {
           console.log(result)
 
           return <div className='cartao-with-increments'> 
-          <div key={result} className='cartao'>
+          <div key={result.symbol || result} className='cartao'>
             <div className='cartao-header'>
-              <Link to={`/wallet/${result.symbol}`} className='link-empresa'>  
+              <Link to={`/wallet/${result.symbol || ''}`} className='link-empresa'>  
               <div className='cartao-header-left'> 
-                <img  alt="Stock Logo" src={result.logourl} />
+                <img  alt="Stock Logo" src={result.logourl || ''} />
               </div>
               <div className='cartao-header-mid'>
-                <h1>{result.longName}</h1>
-                <p>{result.symbol}</p>
+                <h1>{result.longName || 'N/A'}</h1>
+                <p>{result.symbol || 'N/A'}</p>
                 <span className='stock-percent-profit'>0,00%</span>
               </div>
               </Link>
@@ -57,7 +57,7 @@ const CardsFII = () => {
                 </div>
                 <div className='cartao-header-right-bottom'>
                   <p>VALOR ATUAL:</p>
-                  <h2>R${result.regularMarketPrice.toFixed(2)}</h2>
+                  <h2>R${result.regularMarketPrice ? result.regularMarketPrice.toFixed(2) : 'N/A'}</h2>
                 </div>
               </div>
             </div>
@@ -66,7 +66,17 @@ const CardsFII = () => {
             <img src={grafico} />
           </div>
         </div>
-        }))
+        })) : (
+          <div className='cartao-with-increments'> 
+            <div className='cartao'>
+              <div className='cartao-header'>
+                <div className='cartao-header-mid'>
+                  <p>Erro ao carregar dados dos FIIs</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
     )
   };
   

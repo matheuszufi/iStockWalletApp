@@ -32,10 +32,11 @@ const CardBTC = () => {
     return (
         isLoading ? (
           <p>Carregando...</p>
-        ) : (   <div className='cartao-with-increments'> 
+        ) : result && result.length > 3 ? (   
+                <div className='cartao-with-increments'> 
                   <div key={result} className='cartao'>
                     <div className='cartao-header'>
-                      <Link to={`/wallet/${result[3].fromCurrency}`} className='link-empresa'>  
+                      <Link to={`/wallet/${result[3]?.fromCurrency || 'BTC'}`} className='link-empresa'>  
                       <div className='cartao-header-left'> 
                       <div className='currency-img'> 
                       <FaBitcoin />
@@ -44,8 +45,8 @@ const CardBTC = () => {
                    
                       </div>
                       <div className='cartao-header-mid'>
-                        <h1>{result[3].name}</h1>
-                        <p>{result[3].fromCurrency}</p>
+                        <h1>{result[3]?.name || 'Bitcoin'}</h1>
+                        <p>{result[3]?.fromCurrency || 'BTC'}</p>
                         <span className='stock-percent-profit'>0,00%</span>
                       </div>
                       </Link>
@@ -57,7 +58,7 @@ const CardBTC = () => {
                         </div>
                         <div className='cartao-header-right-bottom'>
                           <p>VALOR ATUAL:</p>
-                          <h2>R${result[3].askPrice}</h2>
+                          <h2>R${result[3]?.askPrice || 'N/A'}</h2>
                           
                         </div>
                       </div>
@@ -67,6 +68,16 @@ const CardBTC = () => {
                     <img src={grafico} />
                   </div>
                 </div>
+        ) : (
+          <div className='cartao-with-increments'> 
+            <div className='cartao'>
+              <div className='cartao-header'>
+                <div className='cartao-header-mid'>
+                  <p>Erro ao carregar dados do Bitcoin</p>
+                </div>
+              </div>
+            </div>
+          </div>
         )
     )
   };

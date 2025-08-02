@@ -27,7 +27,7 @@ const CardsHome = () => {
     return (
         isLoading ? (
           <p>Carregando...</p>
-        ) : (
+        ) : results && results.length > 0 ? (
         results.map(result => {
           
           console.log(result[1])
@@ -43,14 +43,19 @@ const CardsHome = () => {
               </div>
               <div className='cartao-home-header-right'>
                   <p>Valor:</p>
-                  <h2>R${result.regularMarketPrice.toFixed(2)}</h2>
+                  <h2>R${result.regularMarketPrice?.toFixed(2) || 'N/A'}</h2>
               </div>
             </div>
 
 
         
           </div>
-        }))
+        })
+        ) : (
+          <div className='cartao-home'>
+            <p>Erro ao carregar dados das ações</p>
+          </div>
+        )
     )
   };
   

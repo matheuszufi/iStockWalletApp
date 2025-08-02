@@ -34,7 +34,7 @@ function SignIn() {
 
             const userCredential = await signInWithEmailAndPassword(auth, email, password)
             if(userCredential.user) {
-                navigate('/wallet')
+                navigate('/dashboard')
             } 
 
 
@@ -54,38 +54,56 @@ function SignIn() {
                
             <div className='pageContainer'>
                 <header>
-                    <p className='pageHeader'> Bem vindo de volta!</p>
+                    <p className='pageHeader'>Fazer Login</p>
                 </header>
-            
-                <form onSubmit={onSubmit}>
-                    <input type='email' className='emailInput' placeholder='Email' id='email' value={email} onChange={onChange} />
-                
-                    <div className='passwordInputDiv'>
-                        <input type={showPassword ? 'text' : 'password'} className='passwordInput' placeholder='Senha'  id='password' value={password} onChange={onChange}/>
 
-                        <img src={visibilityIcon} alt='show password' className='showPassword' onClick={() => setShowPassword((prevState) => !prevState)} />
-                    </div>
-                
-                    <Link to='/forgot-password' className='forgotPasswordLink'> Esqueci minha senha </Link>
+                <main>
+                    <form onSubmit={onSubmit}>
+                        <input 
+                            type='email' 
+                            className='emailInput' 
+                            placeholder='Email' 
+                            id='email' 
+                            value={email} 
+                            onChange={onChange} 
+                        />
 
-                    <div className="signInBar">
-                        <p className="signInText">Login</p>
+                        <div className='passwordInputDiv'>
+                            <input 
+                                type={showPassword ? 'text' : 'password'} 
+                                className='passwordInput' 
+                                placeholder='Senha' 
+                                id='password' 
+                                value={password} 
+                                onChange={onChange} 
+                            />
 
-                        <button className="signInButton">
-                            <ArrowRightIcon fill='#f1f1f1' whidth='34px' height='34px' />
-                        </button>
-                    </div>
-                </form>
-            
-                <OAuth />
+                            <img 
+                                src={visibilityIcon} 
+                                alt='show password' 
+                                className='graficoPassword' 
+                                onClick={() => setShowPassword((prevState) => !prevState)} 
+                            />
+                        </div>
 
-                <Link to='/sign-up' className='registerLink'>Registre-se</Link>
-            
-            
-            
-            
-            
-            
+                        <Link to='/forgot-password' className='forgotPasswordLink'>
+                            Esqueceu a senha?
+                        </Link>
+
+                        <div className='signInBar'>
+                            <p className='signInText'>Entrar</p>
+                            <button className='signInButton'>
+                                <ArrowRightIcon fill='#ffffff' width='34px' height='34px' />
+                            </button>
+                        </div>
+                    </form>
+
+                    <OAuth />
+
+                    <Link to='/sign-up' className='registerLink'>
+                        Não tem uma conta? Registre-se
+                    </Link>
+                </main>
             </div>
         </>
     )

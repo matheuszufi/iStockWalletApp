@@ -31,18 +31,19 @@ const CardDollar = () => {
     return (
         isLoading ? (
           <p>Carregando...</p>
-        ) : (   <div className='cartao-with-increments'> 
+        ) : result && result.length > 0 ? (   
+                <div className='cartao-with-increments'> 
                   <div key={result} className='cartao'>
                     <div className='cartao-header'>
-                      <Link to={`/wallet/${result[0].fromCurrency}`} className='link-empresa'>  
+                      <Link to={`/wallet/${result[0]?.fromCurrency || 'USD'}`} className='link-empresa'>  
                       <div className='cartao-header-left'> 
                       <div className='currency-img'>
                             <FaDollarSign />
                       </div>
                       </div>
                       <div className='cartao-header-mid'>
-                        <h1>{result[0].name}</h1>
-                        <p>{result[0].fromCurrency}</p>
+                        <h1>{result[0]?.name || 'Dólar'}</h1>
+                        <p>{result[0]?.fromCurrency || 'USD'}</p>
                         <span className='stock-percent-profit'>0,00%</span>
                       </div>
                       </Link>
@@ -54,7 +55,7 @@ const CardDollar = () => {
                         </div>
                         <div className='cartao-header-right-bottom'>
                           <p>VALOR ATUAL:</p>
-                          <h2>R${result[0].askPrice}</h2>
+                          <h2>R${result[0]?.askPrice || 'N/A'}</h2>
                         </div>
                       </div>
                     </div>
@@ -63,6 +64,16 @@ const CardDollar = () => {
                     <img src={grafico} />
                   </div>
                 </div>
+        ) : (
+          <div className='cartao-with-increments'> 
+            <div className='cartao'>
+              <div className='cartao-header'>
+                <div className='cartao-header-mid'>
+                  <p>Erro ao carregar dados do câmbio</p>
+                </div>
+              </div>
+            </div>
+          </div>
         )
     )
   };

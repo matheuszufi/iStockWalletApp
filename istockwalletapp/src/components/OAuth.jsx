@@ -28,7 +28,7 @@ function OAuth() {
                     timestamp: serverTimestamp()
                 })
             }
-            navigate('/')
+            navigate('/dashboard')
 
         } catch (error) {
             toast.error('Houve algum erro com a conta Google.')

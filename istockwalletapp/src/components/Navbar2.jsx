@@ -2,7 +2,7 @@ import {useNavigate, useLocation} from 'react-router-dom'
 
 import {ReactComponent as PersonOutlineIcon} from '../assets/svg/personOutlineIcon.svg'
 
-import {FaWallet, FaHome} from 'react-icons/fa'
+import {FaWallet, FaHome, FaTachometerAlt} from 'react-icons/fa'
 
 
 
@@ -26,6 +26,11 @@ function Navbar2() {
                         <li className='navbarListItem' onClick={() => navigate('/')}>
                             <FaHome  fill={pathMatchRoute('/') ? '#00cc66' : '#8f8f8f'} width='36px' height='36px'/>
                             <p className={pathMatchRoute('/') ? 'navbarListItemNameActive' : 'navbarListItemName'}>Início</p>
+                        </li>
+
+                        <li className='navbarListItem' onClick={() => navigate('/dashboard')}>
+                            <FaTachometerAlt  fill={pathMatchRoute('/dashboard') ? '#00cc66' : '#8f8f8f'} width='36px' height='36px'/>
+                            <p className={pathMatchRoute('/dashboard') ? 'navbarListItemNameActive' : 'navbarListItemName'}>Dashboard</p>
                         </li>
 
                         <li className='navbarListItem' onClick={() => navigate('/wallet')}>
