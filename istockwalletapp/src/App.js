@@ -13,8 +13,6 @@ import Profile from './pages/Profile'
 import Wallet from './pages/Wallet'
 import About from './pages/About'
 import ForgotPassword from './pages/ForgotPassword'
-import AESB3 from './pages/Stocks/AESB3.jsx'
-import ABEV3 from './pages/Stocks/ABEV3.jsx'
 
 function App() {
   return (
@@ -35,11 +33,7 @@ function App() {
           <Route path='/stock' element={<Stock />} />
         </Route>
         
-        <Route path='/wallet' element={<PrivateRoute />} >
         <Route path='/wallet' element={<Wallet />} />
-        <Route path='/wallet/AESB3' element={<AESB3 />} />
-        <Route path='/wallet/ABEV3' element={<ABEV3 />} />
-        </Route>
         
         <Route path='/forgot-password' element={<ForgotPassword/>} />
    

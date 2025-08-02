@@ -1,8 +1,6 @@
 import React from 'react';
 import { useAuthStatus } from '../hooks/useAuthStatus';
 import { useNavigate, Link } from 'react-router-dom';
-import CardsHome from '../components/CardsHome';
-import CardDollarHome from '../components/CardDollarHome';
 import '../index.css';
 
 const Dashboard = () => {
@@ -75,11 +73,15 @@ const Dashboard = () => {
           <div className="market-cards">
             <div className="market-section">
               <h3>Moedas</h3>
-              <CardDollarHome />
+              <div className="market-placeholder">
+                <p>💰 Dados de moedas em breve...</p>
+              </div>
             </div>
             <div className="market-section">
               <h3>Ações em Destaque</h3>
-              <CardsHome />
+              <div className="market-placeholder">
+                <p>📈 Dados de ações em breve...</p>
+              </div>
             </div>
           </div>
         </div>

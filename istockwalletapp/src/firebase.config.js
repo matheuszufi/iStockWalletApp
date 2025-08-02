@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
+import { getDatabase } from 'firebase/database'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -8,6 +9,7 @@ import { getFirestore } from 'firebase/firestore'
 const firebaseConfig = {
   apiKey: "AIzaSyAYLpylBgyru7--Q7vhtjiKovA4TgJ4kf4",
   authDomain: "istockwalletapp.firebaseapp.com",
+  databaseURL: "https://istockwalletapp-default-rtdb.firebaseio.com",
   projectId: "istockwalletapp",
   storageBucket: "istockwalletapp.appspot.com",
   messagingSenderId: "866777184467",
@@ -20,3 +22,4 @@ const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 
 export const db = getFirestore();
+export const database = getDatabase(app);
