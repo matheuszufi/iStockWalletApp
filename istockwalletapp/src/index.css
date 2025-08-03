@@ -119,7 +119,7 @@ button {
 
 .navbarTopListItemName,
 .navbarTopListItemNameActive {margin-top: 0.25rem; font-size: 14px; font-weight: 600; color: #363636;}
-.navbarTopListItemNameActive {color: #00cc66; }
+.navbarTopListItemNameActive {color: #000000; }
 
 .navbarListItemsTop {
   display: flex;
@@ -1107,7 +1107,7 @@ width: 80px;
   text-align: center;
   margin-bottom: 40px;
   padding: 40px 20px;
-  background: linear-gradient(135deg, #00cc66, #00aa55);
+  background: linear-gradient(135deg, #393939, #999999);
   border-radius: 16px;
   color: white;
   box-shadow: 0 8px 32px rgba(0, 204, 102, 0.3);
@@ -1807,8 +1807,8 @@ color: black;
 }
 
 .chart-btn.active {
-  background: #00cc66;
-  border-color: #00cc66;
+  background: #393939;
+  border-color: #393939;
   color: white;
 }
 
@@ -1878,7 +1878,7 @@ color: black;
 }
 
 .asset-type {
-  background-color: #00cc66;
+  background-color: #393939;
   color: white;
   padding: 3px 8px;
   border-radius: 8px;
@@ -1996,7 +1996,7 @@ color: black;
 }
 
 .btn-add-asset {
-  background-color: #00cc66;
+  background-color: #393939;
   color: white;
   border: none;
   padding: 12px 24px;
@@ -2060,7 +2060,7 @@ color: black;
 .wallet-header {
   text-align: center;
   margin-bottom: 30px;
-  background: linear-gradient(135deg, #00cc66, #00b359);
+  background: linear-gradient(135deg, #393939, #999999);
   color: white;
   padding: 30px 20px;
   border-radius: 15px;
