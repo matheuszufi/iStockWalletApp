@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { getStockData } from '../services/brapiService';
 
-function StockCard({ ticker = 'ITUB3' }) {
+function StockCard({ 
+  ticker = 'ITUB3', 
+  showQuantity = false, 
+  userQuantity = 0, 
+  averagePrice = 0, 
+  totalInvested = 0 
+}) {
   const [stockData, setStockData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -122,6 +128,39 @@ function StockCard({ ticker = 'ITUB3' }) {
             <span>{formatCurrency(stockData.regularMarketDayLow || 0)}</span>
           </div>
         </div>
+        
+        {/* Informações da carteira do usuário */}
+        {showQuantity && (
+          <div className="wallet-info">
+            <div className="wallet-divider">Sua Posição</div>
+            <div className="detail-item">
+              <span>Quantidade:</span>
+              <span>{userQuantity}</span>
+            </div>
+            <div className="detail-item">
+              <span>Preço Médio:</span>
+              <span>{formatCurrency(averagePrice)}</span>
+            </div>
+            <div className="detail-item">
+              <span>Total Investido:</span>
+              <span>{formatCurrency(totalInvested)}</span>
+            </div>
+            <div className="detail-item">
+              <span>Valor Atual:</span>
+              <span>{formatCurrency(stockData.regularMarketPrice * userQuantity)}</span>
+            </div>
+            <div className="detail-item wallet-result">
+              <span>Resultado:</span>
+              <span className={
+                (stockData.regularMarketPrice * userQuantity - totalInvested) >= 0 ? 'positive' : 'negative'
+              }>
+                {formatCurrency(stockData.regularMarketPrice * userQuantity - totalInvested)}
+                {' '}
+                ({formatPercentage(((stockData.regularMarketPrice * userQuantity - totalInvested) / totalInvested) * 100)})
+              </span>
+            </div>
+          </div>
+        )}
         
         <div className="last-update">
           <small>

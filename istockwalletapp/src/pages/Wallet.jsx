@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useAuthStatus } from '../hooks/useAuthStatus';
 import { getAuth } from 'firebase/auth';
 import { getDatabase, ref, push, onValue, remove, set } from 'firebase/database';
 import { toast } from 'react-toastify';
 import AssetsPieChart from '../components/AssetsPieChart';
+import StockCard from '../components/StockCard';
 import { getStockData, getMultipleStocks } from '../services/brapiService';
 
 function Wallet() {
@@ -14,6 +15,9 @@ function Wallet() {
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [stockLogos, setStockLogos] = useState({});
+  const [currentPrices, setCurrentPrices] = useState({});
+  const [companyData, setCompanyData] = useState({});
+  const [dataLoaded, setDataLoaded] = useState(false);
   const [isLoadingAssetDetails, setIsLoadingAssetDetails] = useState(false);
   const { loggedIn } = useAuthStatus();
   
@@ -32,6 +36,171 @@ function Wallet() {
   const auth = getAuth();
   const database = getDatabase();
 
+  // Função para carregar dados completos dos ativos da API
+  const fetchAssetsData = useCallback(async (assetsList) => {
+    console.log('🚀 fetchAssetsData chamada com:', assetsList?.length, 'ativos');
+    
+    if (!assetsList || assetsList.length === 0) {
+      console.log('❌ Lista de ativos vazia ou inexistente');
+      setDataLoaded(true);
+      return;
+    }
+    
+    // Filtrar apenas ativos que precisam de dados da API (não são tesouro/renda fixa)
+    const apiTickers = assetsList
+      .filter(asset => {
+        const needsAPI = !asset.name.startsWith('TESOURO-') && 
+          !asset.name.includes('CDB-') && 
+          !asset.name.includes('LCI-') && 
+          !asset.name.includes('LCA-') && 
+          !asset.name.includes('CRI-') && 
+          !asset.name.includes('CRA-') && 
+          !asset.name.includes('DEBENTURE-') && 
+          !asset.name.includes('LF-') && 
+          !asset.name.includes('LC-') && 
+          !asset.name.includes('CDCA-') && 
+          !asset.name.includes('FUNDOS-');
+        
+        console.log(`🔍 Ativo ${asset.name} precisa de API:`, needsAPI);
+        return needsAPI;
+      })
+      .map(asset => asset.name);
+      
+    console.log('📊 Tickers filtrados para API:', apiTickers);
+    console.log('📋 Lista completa de ativos:', assetsList.map(a => ({ name: a.name, type: a.type })));
+      
+    if (apiTickers.length === 0) {
+      console.log('⚠️ Nenhum ticker válido para buscar na API');
+      setDataLoaded(true);
+      return;
+    }
+
+    // Função para fazer retry da API em caso de erro 429
+    const fetchWithRetry = async (tickers, retries = 3) => {
+      try {
+        console.log(`🚀 Tentativa de busca para: ${tickers}, tentativas restantes: ${retries}`);
+        const response = await getMultipleStocks(tickers);
+        return response;
+      } catch (error) {
+        console.error(`❌ Erro na API (tentativa ${4-retries}):`, error.message);
+        
+        if (error.response?.status === 429 && retries > 1) {
+          const delay = Math.pow(2, 4-retries) * 1000; // Backoff exponencial
+          console.log(`⏰ Aguardando ${delay}ms antes de tentar novamente...`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          return fetchWithRetry(tickers, retries - 1);
+        }
+        throw error;
+      }
+    };
+
+    try {
+      console.log('🚀 Buscando dados para:', apiTickers);
+      const response = await fetchWithRetry(apiTickers.join(','));
+      console.log('📦 Resposta completa da API:', response);
+      
+      if (response && response.results && response.results.length > 0) {
+        console.log('📝 Processando', response.results.length, 'resultados da API');
+        
+        const logos = {};
+        const prices = {};
+        const companies = {};
+        
+        response.results.forEach(stock => {
+          console.log(`💰 Processando ${stock.symbol}: R$ ${stock.regularMarketPrice}`);
+          
+          // Validar se o preço existe e é válido
+          if (stock.regularMarketPrice !== null && 
+              stock.regularMarketPrice !== undefined && 
+              !isNaN(stock.regularMarketPrice) && 
+              stock.regularMarketPrice > 0) {
+            prices[stock.symbol] = parseFloat(stock.regularMarketPrice);
+            console.log(`✅ Preço válido para ${stock.symbol}: R$ ${prices[stock.symbol]}`);
+          } else {
+            console.log(`⚠️ Preço inválido para ${stock.symbol}:`, stock.regularMarketPrice);
+          }
+          
+          // Processar logo
+          if (stock.logourl) {
+            logos[stock.symbol] = stock.logourl;
+            console.log(`🖼️ Logo salvo para ${stock.symbol}`);
+          }
+          
+          // Armazenar dados completos da empresa
+          companies[stock.symbol] = {
+            symbol: stock.symbol,
+            shortName: stock.shortName,
+            longName: stock.longName,
+            currency: stock.currency,
+            marketCap: stock.marketCap,
+            regularMarketChange: stock.regularMarketChange,
+            regularMarketChangePercent: stock.regularMarketChangePercent,
+            regularMarketTime: stock.regularMarketTime,
+            regularMarketDayHigh: stock.regularMarketDayHigh,
+            regularMarketDayLow: stock.regularMarketDayLow,
+            regularMarketVolume: stock.regularMarketVolume,
+            fiftyTwoWeekHigh: stock.fiftyTwoWeekHigh,
+            fiftyTwoWeekLow: stock.fiftyTwoWeekLow,
+            dividendYield: stock.dividendYield,
+            dividendDate: stock.dividendDate,
+            earningsTimestamp: stock.earningsTimestamp,
+            earningsTimestampStart: stock.earningsTimestampStart,
+            earningsTimestampEnd: stock.earningsTimestampEnd,
+            trailingPE: stock.trailingPE,
+            forwardPE: stock.forwardPE,
+            region: stock.region,
+            summaryProfile: stock.summaryProfile
+          };
+        });
+        
+        console.log('✅ Dados processados:');
+        console.log('📊 Logos:', Object.keys(logos).length, '- Símbolos:', Object.keys(logos));
+        console.log('💲 Preços:', Object.keys(prices).length, '- Preços encontrados:', prices);
+        console.log('🏢 Empresas:', Object.keys(companies).length, '- Símbolos:', Object.keys(companies));
+        
+        // Atualizar os estados com os novos dados
+        setStockLogos(prev => {
+          const updated = { ...prev, ...logos };
+          console.log('🔄 StockLogos atualizado:', updated);
+          return updated;
+        });
+        
+        setCurrentPrices(prev => {
+          const updated = { ...prev, ...prices };
+          console.log('🔄 CurrentPrices atualizado:', updated);
+          return updated;
+        });
+        
+        setCompanyData(prev => {
+          const updated = { ...prev, ...companies };
+          console.log('🔄 CompanyData atualizado:', Object.keys(updated));
+          return updated;
+        });
+        
+        // Verificar se todos os ativos têm preços
+        const assetsWithoutPrices = apiTickers.filter(ticker => !prices[ticker]);
+        if (assetsWithoutPrices.length > 0) {
+          console.log('⚠️ Ativos sem preços encontrados:', assetsWithoutPrices);
+        }
+        
+      } else {
+        console.log('❌ Nenhum resultado válido da API');
+        console.log('📦 Response recebido:', response);
+      }
+    } catch (error) {
+      console.error('❌ Erro ao buscar dados:', error);
+      console.error('📋 Detalhes do erro:', error.message, error.stack);
+      
+      // Em caso de erro, ainda marcar como carregado para não ficar infinitamente carregando
+      if (error.response?.status === 429) {
+        console.log('⚠️ Limite de API atingido, tentará novamente em 30 segundos');
+      }
+    } finally {
+      setDataLoaded(true);
+      console.log('✅ fetchAssetsData finalizada - dataLoaded = true');
+    }
+  }, []);
+
   // Carregar ativos do Firebase
   useEffect(() => {
     if (loggedIn && auth.currentUser) {
@@ -44,39 +213,48 @@ function Wallet() {
             id,
             ...asset
           }));
+          console.log('📊 Ativos carregados do Firebase:', assetsList.map(a => a.name));
           setAssets(assetsList);
-          // Carregar logos dos ativos existentes
-          loadAssetsLogos(assetsList);
         } else {
           setAssets([]);
+          setDataLoaded(true);
         }
         setLoading(false);
       });
 
       return () => unsubscribe();
+    } else {
+      setLoading(false);
     }
   }, [loggedIn, auth.currentUser, database]);
 
-  // Função para carregar logos dos ativos
-  const loadAssetsLogos = async (assetsList) => {
-    const tickers = assetsList.map(asset => asset.name);
-    if (tickers.length > 0) {
-      try {
-        const stocksData = await getMultipleStocks(tickers.join(','));
-        if (stocksData && stocksData.results) {
-          const logos = {};
-          stocksData.results.forEach(stock => {
-            if (stock.logourl) {
-              logos[stock.symbol] = stock.logourl;
-            }
-          });
-          setStockLogos(prev => ({ ...prev, ...logos }));
-        }
-      } catch (error) {
-        console.error('Erro ao carregar logos:', error);
-      }
+  // Buscar dados da API quando os ativos mudarem
+  useEffect(() => {
+    console.log('🔍 useEffect [assets] disparado - assets.length:', assets.length);
+    console.log('📋 Lista de ativos:', assets.map(a => a.name));
+    
+    if (assets.length > 0) {
+      console.log('🔄 Iniciando busca automática de dados...');
+      // Resetar dataLoaded para mostrar estado de carregamento
+      setDataLoaded(false);
+      fetchAssetsData(assets);
+    } else {
+      console.log('⚠️ Nenhum ativo encontrado para buscar dados');
+      setDataLoaded(true);
     }
-  };
+  }, [assets, fetchAssetsData]);
+
+  // Atualizar dados automaticamente a cada 2 minutos (evitar limite da API)
+  useEffect(() => {
+    if (assets.length > 0 && dataLoaded) {
+      const interval = setInterval(() => {
+        console.log('🔄 Atualizando dados automaticamente...');
+        fetchAssetsData(assets);
+      }, 120000); // 2 minutos em vez de 30 segundos
+
+      return () => clearInterval(interval);
+    }
+  }, [assets, dataLoaded, fetchAssetsData]);
 
   // Função para criar informações de ativos manuais (Tesouro e Renda Fixa)
   const createManualAssetInfo = (assetCode) => {
@@ -531,6 +709,61 @@ function Wallet() {
     return assets.reduce((total, asset) => total + asset.totalValue, 0);
   };
 
+  // Função para calcular o valor atual de um ativo
+  const getCurrentValue = (asset) => {
+    const currentPrice = currentPrices[asset.name];
+    
+    if (currentPrice !== null && currentPrice !== undefined && currentPrice > 0) {
+      const currentValue = currentPrice * asset.quantity;
+      return currentValue;
+    }
+    return null;
+  };
+
+  // Função para calcular o resultado (profit/loss) de um ativo
+  const getAssetResult = (asset) => {
+    const currentValue = getCurrentValue(asset);
+    if (currentValue !== null) {
+      const investedValue = asset.totalValue;
+      const result = currentValue - investedValue;
+      const percentage = investedValue > 0 ? (result / investedValue) * 100 : 0;
+      return {
+        value: result,
+        percentage: percentage,
+        isPositive: result >= 0
+      };
+    }
+    return null;
+  };
+
+  // Função para calcular totais da carteira
+  const getPortfolioTotals = () => {
+    let totalInvested = 0;
+    let totalCurrent = 0;
+    let assetsWithData = 0;
+
+    assets.forEach(asset => {
+      totalInvested += asset.totalValue;
+      const currentValue = getCurrentValue(asset);
+      if (currentValue !== null) {
+        totalCurrent += currentValue;
+        assetsWithData++;
+      }
+    });
+
+    const totalResult = totalCurrent - totalInvested;
+    const totalPercentage = totalInvested > 0 ? (totalResult / totalInvested) * 100 : 0;
+
+    return {
+      totalInvested,
+      totalCurrent,
+      totalResult,
+      totalPercentage,
+      assetsWithData,
+      isPositive: totalResult >= 0
+    };
+  };
+
   if (!loggedIn) {
     return (
       <div className="wallet-container">
@@ -558,6 +791,35 @@ function Wallet() {
           <span>+</span>
           Adicionar Ativo
         </button>
+        
+        {assets.length > 0 && (
+          <button 
+            className="btn-refresh-data"
+            onClick={() => {
+              console.log('🔄 Atualizando dados manualmente...');
+              setDataLoaded(false);
+              fetchAssetsData(assets);
+            }}
+            disabled={!dataLoaded}
+            style={{
+              background: dataLoaded ? '#667eea' : '#ccc',
+              color: 'white',
+              border: 'none',
+              borderRadius: '12px',
+              padding: '12px 20px',
+              margin: '0 0 0 12px',
+              cursor: dataLoaded ? 'pointer' : 'not-allowed',
+              fontSize: '14px',
+              fontWeight: '600',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
+            }}
+          >
+            <span>🔄</span>
+            {dataLoaded ? 'Atualizar Preços' : 'Carregando...'}
+          </button>
+        )}
       </div>
 
       {/* Resumo da Carteira */}
@@ -572,8 +834,23 @@ function Wallet() {
               </div>
               <div className="stat-item">
                 <p>Total Investido</p>
-                <strong>R$ {getTotalInvested().toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</strong>
+                <strong>R$ {getPortfolioTotals().totalInvested.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</strong>
               </div>
+              {getPortfolioTotals().assetsWithData > 0 && (
+                <>
+                  <div className="stat-item">
+                    <p>Valor Atual</p>
+                    <strong>R$ {getPortfolioTotals().totalCurrent.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</strong>
+                  </div>
+                  <div className="stat-item">
+                    <p>Resultado</p>
+                    <strong className={getPortfolioTotals().isPositive ? 'positive' : 'negative'}>
+                      R$ {getPortfolioTotals().totalResult.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} 
+                      ({getPortfolioTotals().totalPercentage > 0 ? '+' : ''}{getPortfolioTotals().totalPercentage.toFixed(2)}%)
+                    </strong>
+                  </div>
+                </>
+              )}
             </div>
           </div>
           <div className="chart-container">
@@ -598,58 +875,109 @@ function Wallet() {
         </div>
       ) : (
         <div className="assets-grid">
-          {assets.map((asset) => (
-            <div key={asset.id} className="asset-card" data-type={asset.type}>
-              <div className="asset-header">
-                <div className="asset-info">
-                  <div className="asset-title-row">
-                    {stockLogos[asset.name] && (
-                      <img 
-                        src={stockLogos[asset.name]} 
-                        alt={asset.name}
-                        className="asset-logo"
-                        onError={(e) => {
-                          e.target.style.display = 'none';
-                        }}
-                      />
-                    )}
-                    <h4>{asset.name}</h4>
+          {assets.map((asset) => {
+            // Verificar se é um ativo que precisa de dados da API (ações, criptos, fiis)
+            const needsStockCard = !asset.name.startsWith('TESOURO-') && 
+              !asset.name.includes('CDB-') && 
+              !asset.name.includes('LCI-') && 
+              !asset.name.includes('LCA-') && 
+              !asset.name.includes('CRI-') && 
+              !asset.name.includes('CRA-') && 
+              !asset.name.includes('DEBENTURE-') && 
+              !asset.name.includes('LF-') && 
+              !asset.name.includes('LC-') && 
+              !asset.name.includes('CDCA-') && 
+              !asset.name.includes('FUNDOS-');
+
+            if (needsStockCard) {
+              // Para ativos que precisam de dados da API, usar StockCard
+              return (
+                <div key={asset.id} className="wallet-stock-card">
+                  <div className="wallet-asset-info">
+                    <div className="wallet-asset-header">
+                      <span className="wallet-asset-type">{asset.type.toUpperCase()}</span>
+                      <button 
+                        className="wallet-delete-btn"
+                        onClick={() => handleDeleteAsset(asset.id)}
+                        title="Remover ativo"
+                      >
+                        🗑️
+                      </button>
+                    </div>
+                    <div className="wallet-asset-details">
+                      <div className="wallet-detail-row">
+                        <span>Quantidade:</span>
+                        <strong>{asset.quantity}</strong>
+                      </div>
+                      <div className="wallet-detail-row">
+                        <span>Valor Pago Total:</span>
+                        <strong>R$ {asset.totalValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</strong>
+                      </div>
+                      <div className="wallet-detail-row">
+                        <span>Preço Médio Pago:</span>
+                        <strong>R$ {asset.paidValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</strong>
+                      </div>
+                    </div>
                   </div>
-                  <p className="asset-name">{asset.type.toUpperCase()}</p>
-                  <span 
-                    className="asset-type" 
-                    data-crypto={asset.type === 'cripto' ? asset.cryptoType : ''}
-                  >
-                    {asset.sector || asset.fiiType || asset.cryptoType || asset.tesouroType || asset.rendaFixaType || asset.type}
-                  </span>
+                  <StockCard 
+                    ticker={asset.name} 
+                    showQuantity={true}
+                    userQuantity={asset.quantity}
+                    averagePrice={asset.paidValue}
+                    totalInvested={asset.totalValue}
+                  />
                 </div>
-                <div className="asset-actions">
-                  <button 
-                    className="action-btn delete-btn"
-                    onClick={() => handleDeleteAsset(asset.id)}
-                    title="Remover ativo"
-                  >
-                    🗑️
-                  </button>
-                </div>
-              </div>
+              );
+            } else {
+              // Para ativos de renda fixa, manter o card original
+              const currentValue = getCurrentValue(asset);
+              const result = getAssetResult(asset);
               
-              <div className="asset-details">
-                <div className="detail-row">
-                  <span>Quantidade:</span>
-                  <strong>{asset.quantity}</strong>
+              return (
+                <div key={asset.id} className="asset-card fixed-income" data-type={asset.type}>
+                  <div className="asset-header">
+                    <div className="asset-info">
+                      <div className="asset-title-row">
+                        <h4>{asset.name}</h4>
+                      </div>
+                      <p className="asset-name">{asset.type.toUpperCase()}</p>
+                      <span className="asset-type">
+                        {asset.sector || asset.fiiType || asset.cryptoType || asset.tesouroType || asset.rendaFixaType || asset.type}
+                      </span>
+                    </div>
+                    <div className="asset-actions">
+                      <button 
+                        className="action-btn delete-btn"
+                        onClick={() => handleDeleteAsset(asset.id)}
+                        title="Remover ativo"
+                      >
+                        🗑️
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <div className="asset-details">
+                    <div className="detail-row">
+                      <span>Quantidade:</span>
+                      <strong>{asset.quantity}</strong>
+                    </div>
+                    <div className="detail-row">
+                      <span>Valor Pago:</span>
+                      <strong>R$ {asset.paidValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</strong>
+                    </div>
+                    <div className="detail-row">
+                      <span>Total Investido:</span>
+                      <strong>R$ {asset.totalValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</strong>
+                    </div>
+                    <div className="detail-row">
+                      <span>Status:</span>
+                      <strong className="fixed-income-status">Renda Fixa</strong>
+                    </div>
+                  </div>
                 </div>
-                <div className="detail-row">
-                  <span>Valor Pago:</span>
-                  <strong>R$ {asset.paidValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</strong>
-                </div>
-                <div className="detail-row">
-                  <span>Total Investido:</span>
-                  <strong>R$ {asset.totalValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</strong>
-                </div>
-              </div>
-            </div>
-          ))}
+              );
+            }
+          })}
         </div>
       )}
 
