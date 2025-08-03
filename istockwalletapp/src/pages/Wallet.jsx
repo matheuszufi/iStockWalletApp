@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuthStatus } from '../hooks/useAuthStatus';
 import { getAuth } from 'firebase/auth';
-import { getDatabase, ref, push, onValue, remove } from 'firebase/database';
+import { getDatabase, ref, push, onValue, remove, set } from 'firebase/database';
 import { toast } from 'react-toastify';
 import AssetsPieChart from '../components/AssetsPieChart';
 
@@ -64,22 +64,52 @@ function Wallet() {
     }
 
     try {
-      const assetsRef = ref(database, `users/${auth.currentUser.uid}/assets`);
+      const tickerName = formData.name.toUpperCase();
+      const newQuantity = parseInt(formData.quantity);
+      const newPaidValue = parseFloat(formData.paidValue);
       
-      const assetData = {
-        name: formData.name.toUpperCase(),
-        type: formData.type,
-        sector: formData.sector || null,
-        fiiType: formData.fiiType || null,
-        paidValue: parseFloat(formData.paidValue),
-        quantity: parseInt(formData.quantity),
-        totalValue: parseFloat(formData.paidValue) * parseInt(formData.quantity),
-        createdAt: new Date().toISOString()
-      };
+      // Verificar se o ativo já existe
+      const existingAsset = assets.find(asset => asset.name === tickerName);
+      
+      if (existingAsset) {
+        // Calcular média ponderada do valor pago
+        const currentTotalInvested = existingAsset.quantity * existingAsset.paidValue;
+        const newTotalInvested = newQuantity * newPaidValue;
+        const totalQuantity = existingAsset.quantity + newQuantity;
+        const averagePaidValue = (currentTotalInvested + newTotalInvested) / totalQuantity;
+        
+        // Atualizar ativo existente
+        const assetRef = ref(database, `users/${auth.currentUser.uid}/assets/${existingAsset.id}`);
+        const updatedAssetData = {
+          ...existingAsset,
+          quantity: totalQuantity,
+          paidValue: averagePaidValue,
+          totalValue: averagePaidValue * totalQuantity,
+          updatedAt: new Date().toISOString()
+        };
+        
+        await set(assetRef, updatedAssetData);
+        
+        toast.success(`${tickerName} consolidado! Nova quantidade: ${totalQuantity}, Valor médio: R$ ${averagePaidValue.toFixed(2)}`);
+      } else {
+        // Criar novo ativo
+        const assetsRef = ref(database, `users/${auth.currentUser.uid}/assets`);
+        
+        const assetData = {
+          name: tickerName,
+          type: formData.type,
+          sector: formData.sector || null,
+          fiiType: formData.fiiType || null,
+          paidValue: newPaidValue,
+          quantity: newQuantity,
+          totalValue: newPaidValue * newQuantity,
+          createdAt: new Date().toISOString()
+        };
 
-      await push(assetsRef, assetData);
+        await push(assetsRef, assetData);
+        toast.success('Ativo adicionado com sucesso!');
+      }
       
-      toast.success('Ativo adicionado com sucesso!');
       setShowModal(false);
       setFormData({
         name: '',
@@ -90,8 +120,8 @@ function Wallet() {
         quantity: ''
       });
     } catch (error) {
-      console.error('Erro ao adicionar ativo:', error);
-      toast.error('Erro ao adicionar ativo');
+      console.error('Erro ao processar ativo:', error);
+      toast.error('Erro ao processar ativo');
     }
   };
 
@@ -159,22 +189,13 @@ function Wallet() {
           </div>
           <div className="chart-container">
             <AssetsPieChart assets={assets} viewMode={viewMode} />
+              <div className="chart-controls">
+            
+            <button className={`chart-btn ${viewMode === 'type' ? 'active' : ''}`} onClick={() => setViewMode('type')}>Por Tipo</button>
+            <button className={`chart-btn ${viewMode === 'sector' ? 'active' : ''}`} onClick={() => setViewMode('sector')}>Por Setor</button>
           </div>
-          <div className="chart-controls">
-            <h4>Visualização</h4>
-            <button 
-              className={`chart-btn ${viewMode === 'type' ? 'active' : ''}`}
-              onClick={() => setViewMode('type')}
-            >
-              Por Tipo
-            </button>
-            <button 
-              className={`chart-btn ${viewMode === 'sector' ? 'active' : ''}`}
-              onClick={() => setViewMode('sector')}
-            >
-              Por Setor
-            </button>
           </div>
+        
         </div>
       )}
 

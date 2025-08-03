@@ -1,6 +1,7 @@
 import {Link} from 'react-router-dom'
 import {FaQuestionCircle} from 'react-icons/fa'
 import {FaGoogleWallet, FaMoneyBill} from 'react-icons/fa'
+import StockCard from '../components/StockCard'
 // import MinhaImagem from '../assets/png/istockwalletlogo.png';
 
 function Home() {
@@ -32,7 +33,8 @@ function Home() {
             
                 <div className='home-cards'>
                     <div className="home-placeholder">
-                        <p>📊 Informações de mercado em breve...</p>
+                        <StockCard ticker="ITUB3" />
+                         <StockCard ticker="PETR4" />
                     </div>
                 </div>
             </div>
