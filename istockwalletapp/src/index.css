@@ -1897,6 +1897,52 @@ color: black;
   display: inline-block;
 }
 
+/* Estilos específicos para diferentes tipos de ativos */
+.asset-card[data-type="acao"] .asset-type {
+  background-color: #2563eb;
+}
+
+.asset-card[data-type="fii"] .asset-type {
+  background-color: #dc2626;
+}
+
+.asset-card[data-type="cripto"] .asset-type {
+  background-color: #f59e0b;
+}
+
+.asset-card[data-type="tesouro"] .asset-type {
+  background-color: #059669;
+}
+
+.asset-card[data-type="renda-fixa"] .asset-type {
+  background-color: #7c3aed;
+}
+
+/* Estilos específicos para categorias de criptomoedas */
+.asset-type[data-crypto="bitcoin"] {
+  background-color: #f7931a !important;
+}
+
+.asset-type[data-crypto="ethereum"] {
+  background-color: #627eea !important;
+}
+
+.asset-type[data-crypto="defi"] {
+  background-color: #ff6b35 !important;
+}
+
+.asset-type[data-crypto="meme"] {
+  background-color: #daa520 !important;
+}
+
+.asset-type[data-crypto="exchange"] {
+  background-color: #f3ba2f !important;
+}
+
+.asset-type[data-crypto="payment"] {
+  background-color: #23292f !important;
+}
+
 .asset-actions {
   display: flex;
   gap: 8px;
@@ -2526,6 +2572,128 @@ color: black;
   padding: 20px;
 }
 
+/* Asset Search Styles */
+.asset-search-container {
+  position: relative;
+}
+
+.search-loading {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #e1e5e9;
+  border-top: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #666;
+}
+
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #e1e5e9;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.search-result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.2s;
+}
+
+.search-result-item:hover {
+  background-color: #f8f9fa;
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.search-result-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  object-fit: cover;
+  background: #f8f9fa;
+}
+
+.search-result-info div p {
+  margin: 2px 0 0 0;
+  font-size: 12px;
+  color: #666;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.search-result-info div strong {
+  color: #2c2c2c;
+  font-size: 14px;
+}
+
+.search-result-price {
+  font-weight: 600;
+  color: #00cc66;
+  font-size: 14px;
+}
+
+/* Asset Logo in Cards */
+.asset-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.asset-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  object-fit: cover;
+  background: #f8f9fa;
+  flex-shrink: 0;
+}
+
+.asset-title-row h4 {
+  margin: 0;
+}
+
+/* Loading indicator for sector */
+.loading-indicator {
+  font-size: 12px;
+  color: #00cc66;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.form-select:disabled {
+  background-color: #f8f9fa;
+  color: #6c757d;
+  opacity: 0.7;
+}
+
 @media (max-width: 768px) {
   .stock-card {
     max-width: 100%;
@@ -2539,5 +2707,23 @@ color: black;
 
   .stock-info h3 {
     font-size: 1.3rem;
+  }
+
+  .search-results {
+    max-height: 200px;
+  }
+
+  .search-result-info div p {
+    max-width: 150px;
+  }
+
+  .asset-title-row {
+    gap: 8px;
+  }
+
+  .asset-logo,
+  .search-result-logo {
+    width: 24px;
+    height: 24px;
   }
 }

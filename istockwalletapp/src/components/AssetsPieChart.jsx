@@ -35,8 +35,9 @@ const AssetsPieChart = ({ assets, viewMode }) => {
       const colors = {
         'acao': '#00cc66',
         'fii': '#3b82f6',
-        'tesouro': '#f59e0b',
-        'renda-fixa': '#ef4444'
+        'cripto': '#f59e0b',
+        'tesouro': '#ef4444',
+        'renda-fixa': '#8b5cf6'
       };
       return colors[key] || '#6b7280';
     } else {
@@ -58,6 +59,7 @@ const AssetsPieChart = ({ assets, viewMode }) => {
       const labels = {
         'acao': 'Ações',
         'fii': 'FIIs',
+        'cripto': 'Criptomoedas',
         'tesouro': 'Tesouro',
         'renda-fixa': 'Renda Fixa'
       };
