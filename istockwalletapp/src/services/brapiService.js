@@ -66,4 +66,20 @@ export const getDividends = async (ticker) => {
   }
 };
 
+// Função para buscar dados históricos para gráficos
+export const getHistoricalData = async (ticker, range = '1mo', interval = '1d') => {
+  try {
+    const response = await brapiApi.get(`/quote/${ticker}`, {
+      params: {
+        range: range,
+        interval: interval
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao buscar dados históricos:', error);
+    throw error;
+  }
+};
+
 export default brapiApi;

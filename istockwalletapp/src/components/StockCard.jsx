@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getStockData } from '../services/brapiService';
+import StockChart from './StockChart';
 
 function StockCard({ 
   ticker = 'ITUB3', 
@@ -11,6 +12,7 @@ function StockCard({
   const [stockData, setStockData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedPeriod, setSelectedPeriod] = useState('1mo');
 
   useEffect(() => {
     const fetchStockData = async () => {
@@ -84,6 +86,14 @@ function StockCard({
   const changePercent = stockData.regularMarketChangePercent || 0;
   const isPositive = changePercent >= 0;
 
+  const periodOptions = [
+    { value: '1d', label: '1D' },
+    { value: '1w', label: '1S' },
+    { value: '1mo', label: '1M' },
+    { value: '1y', label: '1A' },
+    { value: '5y', label: '5A' }
+  ];
+
   return (
     <div className="stock-card">
       <div className="stock-card-header">
@@ -112,6 +122,27 @@ function StockCard({
           <span className="change-percent">
             ({formatPercentage(changePercent)})
           </span>
+        </div>
+        
+        {/* Seção de Gráficos */}
+        <div className="chart-section">
+          <div className="chart-content">
+            <div className="period-selector">
+              {periodOptions.map(option => (
+                <button
+                  key={option.value}
+                  className={`period-btn ${selectedPeriod === option.value ? 'active' : ''}`}
+                  onClick={() => setSelectedPeriod(option.value)}
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
+            
+            <div className="chart-wrapper">
+              <StockChart ticker={ticker} period={selectedPeriod} />
+            </div>
+          </div>
         </div>
         
         <div className="stock-details">
