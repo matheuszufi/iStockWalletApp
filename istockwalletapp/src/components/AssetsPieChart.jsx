@@ -11,12 +11,21 @@ import {
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const AssetsPieChart = ({ assets, viewMode }) => {
-  // Calcular a distribuição por tipo de ativo
+  // Calcular a distribuição por tipo de ativo, setor ou ticker
   const getAssetDistribution = () => {
     const distribution = {};
     
     assets.forEach(asset => {
-      const key = viewMode === 'type' ? asset.type : (asset.sector || 'Não informado');
+      let key;
+      
+      if (viewMode === 'type') {
+        key = asset.type;
+      } else if (viewMode === 'sector') {
+        key = asset.sector || 'Não informado';
+      } else if (viewMode === 'ticker') {
+        key = asset.name; // Usar o ticker/nome do ativo
+      }
+      
       if (distribution[key]) {
         distribution[key] += asset.totalValue;
       } else {
@@ -29,7 +38,7 @@ const AssetsPieChart = ({ assets, viewMode }) => {
 
   const distribution = getAssetDistribution();
 
-  // Configurar cores para cada tipo de ativo ou setor
+  // Configurar cores para cada tipo de ativo, setor ou ticker
   const getColorForAssetType = (key) => {
     if (viewMode === 'type') {
       const colors = {
@@ -41,15 +50,19 @@ const AssetsPieChart = ({ assets, viewMode }) => {
       };
       return colors[key] || '#6b7280';
     } else {
-      // Cores para setores
-      const sectorColors = [
+      // Cores dinâmicas para setores e tickers
+      const dynamicColors = [
         '#00cc66', '#3b82f6', '#f59e0b', '#ef4444', 
         '#8b5cf6', '#06d6a0', '#f72585', '#4cc9f0',
-        '#7209b7', '#560bad', '#480ca8', '#3a0ca3'
+        '#7209b7', '#560bad', '#480ca8', '#3a0ca3',
+        '#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24',
+        '#f0932b', '#eb4d4b', '#6c5ce7', '#a29bfe',
+        '#fd79a8', '#00b894', '#00cec9', '#55a3ff',
+        '#6c5ce7', '#fd79a8', '#fdcb6e', '#e84393'
       ];
       const keys = Object.keys(distribution);
       const index = keys.indexOf(key);
-      return sectorColors[index % sectorColors.length];
+      return dynamicColors[index % dynamicColors.length];
     }
   };
 
@@ -64,6 +77,8 @@ const AssetsPieChart = ({ assets, viewMode }) => {
         'renda-fixa': 'Renda Fixa'
       };
       return labels[key] || key.toUpperCase();
+    } else if (viewMode === 'ticker') {
+      return key; // Para tickers, usar o nome do ativo diretamente
     } else {
       return key; // Para setores, usar o nome diretamente
     }

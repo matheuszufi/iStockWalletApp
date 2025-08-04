@@ -2328,6 +2328,8 @@ color: black;
     min-width: auto;
     align-self: center;
     gap: 8px;
+    width: 100%;
+    max-width: 140px;
   }
 
   .chart-controls h4 {
@@ -2337,8 +2339,12 @@ color: black;
   .chart-btn {
     flex: 1;
     font-size: 11px;
-    padding: 8px 12px;
-    max-width: 120px;
+    padding: 6px 8px;
+    max-width: 140px;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .portfolio-stats {
@@ -2861,6 +2867,40 @@ color: black;
   letter-spacing: 0.5px;
 }
 
+/* === ESTILOS PARA BOTÕES DE AÇÃO DA CARTEIRA === */
+.wallet-asset-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.wallet-asset-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.wallet-sell-btn {
+  background: #059669;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wallet-sell-btn:hover {
+  background: #047857;
+  transform: scale(1.05);
+}
+
 .wallet-delete-btn {
   background: #dc3545;
   color: white;
@@ -2869,12 +2909,16 @@ color: black;
   border-radius: 6px;
   cursor: pointer;
   font-size: 14px;
-  transition: background 0.2s;
+  transition: all 0.2s ease;
   margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .wallet-delete-btn:hover {
   background: #c82333;
+  transform: scale(1.05);
 }
 
 .wallet-asset-details {
@@ -3097,5 +3141,133 @@ color: black;
     padding: 4px 8px;
     font-size: 11px;
     min-width: 35px;
+  }
+}
+
+/* === ESTILOS PARA MODAL DE VENDA === */
+.sell-modal {
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.sell-asset-info {
+  margin-bottom: 24px;
+  padding: 16px;
+  background: #f8fafc;
+  border-radius: 8px;
+  border-left: 4px solid #3b82f6;
+}
+
+.asset-summary h3 {
+  margin: 0 0 12px 0;
+  color: #1e293b;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.asset-summary p {
+  margin: 6px 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.asset-summary strong {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.sell-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sale-summary {
+  background: #f1f5f9;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.summary-row:last-child {
+  margin-bottom: 0;
+}
+
+.summary-row span {
+  color: #64748b;
+}
+
+.summary-row strong {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.summary-row strong.positive {
+  color: #059669;
+}
+
+.summary-row strong.negative {
+  color: #dc2626;
+}
+
+.btn-sell {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-sell:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+}
+
+.btn-sell:active {
+  transform: translateY(0);
+}
+
+/* === RESPONSIVIDADE PARA MODAL DE VENDA === */
+@media (max-width: 768px) {
+  .sell-modal {
+    margin: 10px;
+    max-width: calc(100vw - 20px);
+  }
+  
+  .wallet-asset-actions {
+    gap: 6px;
+  }
+  
+  .wallet-sell-btn,
+  .wallet-delete-btn {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+  
+  .asset-summary h3 {
+    font-size: 16px;
+  }
+  
+  .asset-summary p {
+    font-size: 13px;
+  }
+  
+  .summary-row {
+    font-size: 13px;
   }
 }

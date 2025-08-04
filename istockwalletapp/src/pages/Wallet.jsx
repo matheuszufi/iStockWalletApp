@@ -9,6 +9,8 @@ import { getStockData, getMultipleStocks } from '../services/brapiService';
 
 function Wallet() {
   const [showModal, setShowModal] = useState(false);
+  const [showSellModal, setShowSellModal] = useState(false);
+  const [selectedAssetToSell, setSelectedAssetToSell] = useState(null);
   const [assets, setAssets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [viewMode, setViewMode] = useState('type'); // 'type' ou 'sector'
@@ -31,6 +33,11 @@ function Wallet() {
     rendaFixaType: '',
     paidValue: '',
     quantity: ''
+  });
+
+  const [sellFormData, setSellFormData] = useState({
+    sellPrice: '',
+    sellQuantity: ''
   });
 
   const auth = getAuth();
@@ -332,7 +339,7 @@ function Wallet() {
         // Ações
         'PETR4', 'VALE3', 'ITUB4', 'BBDC4', 'ABEV3', 'MGLU3', 'B3SA3',
         'WEGE3', 'RENT3', 'LREN3', 'JBSS3', 'BEEF3', 'SUZB3', 'RAIL3',
-        'BBAS3', 'SANB11', 'BPAC11', 'CIEL3', 'CMIG4', 'EGIE3',
+        'BBAS3', 'SANB11', 'BPAC11', 'CIEL3', 'CMIG4', 'EGIE3', 'PSSA3',
         'VIVT3', 'KLBN11', 'CSNA3', 'USIM5', 'GOAU4', 'TOTS3',
         // FIIs (Fundos Imobiliários)
         'KNRI11', 'HGLG11', 'XPML11', 'BTLG11', 'BCFF11', 'HGRE11',
@@ -705,6 +712,90 @@ function Wallet() {
     }
   };
 
+  const handleOpenSellModal = (asset) => {
+    setSelectedAssetToSell(asset);
+    setSellFormData({
+      sellPrice: '',
+      sellQuantity: ''
+    });
+    setShowSellModal(true);
+  };
+
+  const handleSellAsset = async (e) => {
+    e.preventDefault();
+    
+    if (!sellFormData.sellPrice || !sellFormData.sellQuantity) {
+      toast.error('Por favor, preencha o preço e quantidade de venda');
+      return;
+    }
+
+    const sellQuantity = parseInt(sellFormData.sellQuantity);
+    const sellPrice = parseFloat(sellFormData.sellPrice);
+    
+    if (sellQuantity <= 0 || sellPrice <= 0) {
+      toast.error('Preço e quantidade devem ser maiores que zero');
+      return;
+    }
+
+    if (sellQuantity > selectedAssetToSell.quantity) {
+      toast.error('Quantidade de venda não pode ser maior que a quantidade possuída');
+      return;
+    }
+
+    try {
+      const assetRef = ref(database, `users/${auth.currentUser.uid}/assets/${selectedAssetToSell.id}`);
+      
+      // Calcular nova quantidade e valor total
+      const newQuantity = selectedAssetToSell.quantity - sellQuantity;
+      const newTotalValue = selectedAssetToSell.paidValue * newQuantity;
+      
+      if (newQuantity === 0) {
+        // Se vendeu tudo, remover o ativo
+        await remove(assetRef);
+        toast.success(`${selectedAssetToSell.name} vendido completamente e removido da carteira!`);
+      } else {
+        // Atualizar a quantidade restante
+        const updatedAssetData = {
+          ...selectedAssetToSell,
+          quantity: newQuantity,
+          totalValue: newTotalValue,
+          updatedAt: new Date().toISOString()
+        };
+        
+        await set(assetRef, updatedAssetData);
+        toast.success(`Venda de ${sellQuantity} ${selectedAssetToSell.name} registrada!`);
+      }
+
+      // Registrar a venda no histórico (opcional - pode ser implementado depois)
+      const salesRef = ref(database, `users/${auth.currentUser.uid}/sales`);
+      const saleData = {
+        assetName: selectedAssetToSell.name,
+        assetType: selectedAssetToSell.type,
+        quantitySold: sellQuantity,
+        sellPrice: sellPrice,
+        totalSaleValue: sellQuantity * sellPrice,
+        originalPaidValue: selectedAssetToSell.paidValue,
+        profit: (sellPrice - selectedAssetToSell.paidValue) * sellQuantity,
+        profitPercentage: ((sellPrice - selectedAssetToSell.paidValue) / selectedAssetToSell.paidValue) * 100,
+        saleDate: new Date().toISOString()
+      };
+      
+      await push(salesRef, saleData);
+      
+      // Fechar modal e limpar dados
+      setShowSellModal(false);
+      setSelectedAssetToSell(null);
+      setSellFormData({
+        sellPrice: '',
+        sellQuantity: ''
+      });
+      
+    } catch (error) {
+      console.error('Erro ao processar venda:', error);
+      toast.error('Erro ao processar venda');
+    }
+  };
+
   const getTotalInvested = () => {
     return assets.reduce((total, asset) => total + asset.totalValue, 0);
   };
@@ -859,6 +950,7 @@ function Wallet() {
             
             <button className={`chart-btn ${viewMode === 'type' ? 'active' : ''}`} onClick={() => setViewMode('type')}>Por Tipo</button>
             <button className={`chart-btn ${viewMode === 'sector' ? 'active' : ''}`} onClick={() => setViewMode('sector')}>Por Setor</button>
+            <button className={`chart-btn ${viewMode === 'ticker' ? 'active' : ''}`} onClick={() => setViewMode('ticker')}>Por Ticker</button>
           </div>
           </div>
         
@@ -896,13 +988,22 @@ function Wallet() {
                   <div className="wallet-asset-info">
                     <div className="wallet-asset-header">
                       <span className="wallet-asset-type">{asset.type.toUpperCase()}</span>
-                      <button 
-                        className="wallet-delete-btn"
-                        onClick={() => handleDeleteAsset(asset.id)}
-                        title="Remover ativo"
-                      >
-                        🗑️
-                      </button>
+                      <div className="wallet-asset-actions">
+                        <button 
+                          className="wallet-sell-btn"
+                          onClick={() => handleOpenSellModal(asset)}
+                          title="Vender ativo"
+                        >
+                          💰
+                        </button>
+                        <button 
+                          className="wallet-delete-btn"
+                          onClick={() => handleDeleteAsset(asset.id)}
+                          title="Remover ativo"
+                        >
+                          🗑️
+                        </button>
+                      </div>
                     </div>
                     <div className="wallet-asset-details">
                       <div className="wallet-detail-row">
@@ -1275,6 +1376,112 @@ function Wallet() {
                   className="btn-add"
                 >
                   Adicionar Ativo
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de Venda de Ativo */}
+      {showSellModal && selectedAssetToSell && (
+        <div className="modal-overlay" onClick={() => {
+          setShowSellModal(false);
+          setSelectedAssetToSell(null);
+        }}>
+          <div className="modal-container sell-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>Vender {selectedAssetToSell.name}</h2>
+              <button 
+                className="close-button"
+                onClick={() => {
+                  setShowSellModal(false);
+                  setSelectedAssetToSell(null);
+                }}
+              >
+                ×
+              </button>
+            </div>
+            
+            <div className="sell-asset-info">
+              <div className="asset-summary">
+                <h3>{selectedAssetToSell.name}</h3>
+                <p>Quantidade Possuída: <strong>{selectedAssetToSell.quantity}</strong></p>
+                <p>Preço Médio Pago: <strong>R$ {selectedAssetToSell.paidValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</strong></p>
+                <p>Total Investido: <strong>R$ {selectedAssetToSell.totalValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</strong></p>
+              </div>
+            </div>
+            
+            <form className="modal-form sell-form" onSubmit={handleSellAsset}>
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Preço de Venda (R$) *</label>
+                  <input
+                    type="number"
+                    value={sellFormData.sellPrice}
+                    onChange={(e) => setSellFormData(prev => ({ ...prev, sellPrice: e.target.value }))}
+                    step="0.01"
+                    min="0"
+                    placeholder="0.00"
+                    className="form-input"
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Quantidade a Vender *</label>
+                  <input
+                    type="number"
+                    value={sellFormData.sellQuantity}
+                    onChange={(e) => setSellFormData(prev => ({ ...prev, sellQuantity: e.target.value }))}
+                    min="1"
+                    max={selectedAssetToSell.quantity}
+                    placeholder="1"
+                    className="form-input"
+                    required
+                  />
+                </div>
+              </div>
+
+              {sellFormData.sellPrice && sellFormData.sellQuantity && (
+                <div className="sale-summary">
+                  <div className="summary-row">
+                    <span>Total da Venda:</span>
+                    <strong>R$ {(parseFloat(sellFormData.sellPrice || 0) * parseInt(sellFormData.sellQuantity || 0)).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</strong>
+                  </div>
+                  <div className="summary-row">
+                    <span>Resultado:</span>
+                    <strong className={
+                      (parseFloat(sellFormData.sellPrice || 0) - selectedAssetToSell.paidValue) >= 0 ? 'positive' : 'negative'
+                    }>
+                      R$ {((parseFloat(sellFormData.sellPrice || 0) - selectedAssetToSell.paidValue) * parseInt(sellFormData.sellQuantity || 0)).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                      {' '}
+                      ({((parseFloat(sellFormData.sellPrice || 0) - selectedAssetToSell.paidValue) / selectedAssetToSell.paidValue * 100).toFixed(2)}%)
+                    </strong>
+                  </div>
+                  <div className="summary-row">
+                    <span>Quantidade Restante:</span>
+                    <strong>{selectedAssetToSell.quantity - parseInt(sellFormData.sellQuantity || 0)}</strong>
+                  </div>
+                </div>
+              )}
+
+              <div className="modal-actions">
+                <button 
+                  type="button" 
+                  className="btn-cancel"
+                  onClick={() => {
+                    setShowSellModal(false);
+                    setSelectedAssetToSell(null);
+                  }}
+                >
+                  Cancelar
+                </button>
+                <button 
+                  type="submit" 
+                  className="btn-sell"
+                >
+                  Confirmar Venda
                 </button>
               </div>
             </form>
